@@ -448,13 +448,9 @@
         }
     }
 
-    function getHouseHoldIdAppt() {
-        householdIdSched = getAttributeValue("pyWorkPage", "MemberID");
-        return householdIdSched;
-    }
-
     if (pageUrl == "ScheduleAppointment") {
-        getHouseHoldIdAppt();
+        sessionStorage.setItem('campaignName', 'AppointmentSched');
+
       /*  $(document).on('DOMSubtreeModified', '.sectionDivStyle', function() {
             sessionStorage.setItem('campaignName', 'AppointmentSched');
             get HouseHoldIdAppt();
