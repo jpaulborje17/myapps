@@ -448,6 +448,30 @@
         }
     }
 
+    function loadSchedApp(event) {
+    
+        if (event.target.matches('.layout-noheader-interaction_tabs .Header_nav')) {
+
+            setTimeout(function() {
+
+                var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
+                    function() {
+                        return this.id.match(/\d$/);
+                    }).filter(function() {
+                    return $(this).attr('aria-hidden') == "false"
+                }).contents()[0].id;
+
+
+                if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('Plan Type')").length > 0) {
+                    householdIdSched = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
+                    sessionStorage.setItem('campaignName', 'AppointmentSched');
+                }
+            }, 2000)
+
+        }
+
+    }
+
     if (pageUrl == "ScheduleAppointment") {
         sessionStorage.setItem('campaignName', 'AppointmentSched');
 
@@ -457,34 +481,9 @@
         }); */
  
         window.parent.document.getElementById('l1').addEventListener('click', loaded, false);
-
-        function loaded(event) {
     
-            if (event.target.matches('.layout-noheader-interaction_tabs .Header_nav')) {
-    
-                setTimeout(function() {
-    
-                    var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
-                        function() {
-                            return this.id.match(/\d$/);
-                        }).filter(function() {
-                        return $(this).attr('aria-hidden') == "false"
-                    }).contents()[0].id;
-    
-    
-                    if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('Plan Type')").length > 0) {
-                        householdIdSched = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
-                        sessionStorage.setItem('campaignName', 'AppointmentSched');
-                    }
-                }, 2000)
-    
-            }
-    
-        }
-
-
-
-
+        loadSchedApp(event);
+       
     }
 
 }(jQuery, window, document));
