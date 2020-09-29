@@ -480,7 +480,7 @@
             get HouseHoldIdAppt();
         }); */
  
-        window.parent.document.getElementById('l1').addEventListener('click', loaded, false);
+        window.parent.document.getElementById('l1').addEventListener('click', loadSchedApp, false);
     
         loadSchedApp(event);
        
