@@ -8,8 +8,7 @@
     var ezcommCommunications;
     var pageurl = document.forms[0].elements["TaskSectionReference"].value;
     var reset = false;
-    var householdId;
-    householdId = getAttributeValue("pyWorkPage", "MemberID");
+    var householdId = getAttributeValue("pyWorkPage", "MemberID");
 
 
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
@@ -115,7 +114,7 @@
         ezcommMandRMemObj.policyId = "0";
         ezcommMandRMemObj.encryptedFlag = false;
         ezcommMandRMemObj.additionalIdentifiers = [{
-            id: getHouseHoldId(),
+            id: householdId,
             type: "GPSHID"
         }];
         return ezcommMandRMemObj;
@@ -390,7 +389,7 @@
     
     
                     if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("label:contains('Provider Information')").length > 0) {
-                        console.log('testinnggg');
+                        console.log('testinnggg11');
                         householdId = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
                         sessionStorage.setItem('campaignName', 'ProviderInfo');
 
@@ -400,9 +399,6 @@
             }
     
         }, false);
-
-
-
 
     }
 
