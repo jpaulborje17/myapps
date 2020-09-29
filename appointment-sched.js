@@ -478,6 +478,7 @@
     
                     if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('Plan Type')").length > 0) {
                         householdIdSched = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
+                        sessionStorage.setItem('campaignName', 'AppointmentSched');
                     }
                 }, 2000)
     
