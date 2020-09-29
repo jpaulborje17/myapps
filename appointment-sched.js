@@ -8,6 +8,7 @@
     var pageUrl = document.forms[0].elements["TaskSectionReference"].value;
     var reset = false;
     var householdIdSched;
+    householdIdSched = getAttributeValue("pyWorkPage", "MemberID");
 
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function () {
@@ -95,7 +96,7 @@
         ezcommMandRMemObj.policyId = "0";
         ezcommMandRMemObj.encryptedFlag = false;
         ezcommMandRMemObj.additionalIdentifiers = [{
-            id: getHouseHoldIdAppt(),
+            id: householdIdSched,
             type: "GPSHID"
         }];
         return ezcommMandRMemObj;
@@ -458,6 +459,34 @@
             sessionStorage.setItem('campaignName', 'AppointmentSched');
             get HouseHoldIdAppt();
         }); */
+ 
+        window.parent.document.getElementById('l1').addEventListener('click', loaded, false);
+
+        function loaded(event) {
+    
+            if (event.target.matches('.layout-noheader-interaction_tabs .Header_nav')) {
+    
+                setTimeout(function() {
+    
+                    var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
+                        function() {
+                            return this.id.match(/\d$/);
+                        }).filter(function() {
+                        return $(this).attr('aria-hidden') == "false"
+                    }).contents()[0].id;
+    
+    
+                    if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('Plan Type')").length > 0) {
+                        householdIdSched = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
+                    }
+                }, 2000)
+    
+            }
+    
+        }
+
+
+
 
     }
 
