@@ -294,7 +294,7 @@ window.parent.openGPP = function() {
         function addEzcommCoreLauncherGPPPayment() {
             if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0 &&
                 window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#gpppaymentheader").length === 0) {
-                     $('#RULE_KEY > div:nth-child(1) > div > div > div > div > p').append(appendButton);
+                     $('#RULE_KEY > div:nth-child(1) > div > div > div > div > p').append(appendButton());
             }    
       } 
 
