@@ -1,4 +1,4 @@
-console.log("update 17");
+console.log("update 18");
 
 (function ($, window, document, undefined) {
 
@@ -266,11 +266,14 @@ console.log("update 17");
 function appendButton() {
     var x = document.createElement('button');
     x.id = "gpppaymentheader";
-    x.onclick = window.parent.openGPP();
     var c = document.createElement('image');
-    c.src = '../ezcomm_big.png'
+    c.src = '../ezcomm_big.png';
     x.appendChild(c);
 }
+
+document.getElementById('gpppaymentheader').addEventListener('click', function(){
+    window.parent.openGPP();
+});
 
 
 
