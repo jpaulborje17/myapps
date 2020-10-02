@@ -210,14 +210,17 @@ var ezcommCore = {
 
     function messageEventGppCC(msg) {
         if(msg.data) {
-            console.log('msg', msg);
+            console.log('msg12', msg);
             sessionStorage.setItem('messageSuccessCc', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "");
+            console.log(data);
             var isNull = false;
             if(window.parent.sessionStorage.getItem('autodocmnrgpp') === null) {
+                console.log('testing');
                 window.parent.sessionStorage.setItem('autodocmnrgpp', data);
                 isNull = true;
             } else {
+                console.log('werwere');
                 appendToStorage('autodocmnrgpp', data);
 
             }
