@@ -274,9 +274,9 @@ window.parent.openGPP = function() {
         <span class="col-3"><input name="optradio" type="radio" value="yes" id="ezcomm-mnr-mail-question-yes" class="Radio ezcomm-mnr-mail-question-buttonappt" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">Yes</label></span>\<span class="col-3"><input name="optradio" type="radio" value="no" id="ezcomm-mnr-mail-question-no" class="ezcomm-mnr-mail-question-buttonappt" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">No</label></span>\
         <span/>';
         if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("label:contains('Review & Submit Payment Confirmation')").length > 0 && 
-        window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#newlyAddedQuestionEmailCC").length === 0) {
+        window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#cctrigger").length === 0) {
             if(document.getElementById("pyWorkPageSaveCreditCardInfoNo").checked) {
-                $('#RULE_KEY > div:nth-child(3) > div > div').append('<div class="field-item dataValueRead">Does the caller want a link to the Guest Payment Portal</div> <div class="radioTable"><div><span class="col-3"><input type="radio" onclick="window.parent.openGPP(); value="Yes" class="Radio" checked="" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">Yes</label></span><span class="col-3"><input id="pyWorkPageSaveCreditCardInfoNo" type="radio" value="No" class="Radio" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">No</label></span></div></div>');
+                $('#RULE_KEY > div:nth-child(3) > div > div').append('<div bsimplelayout="true" id="cctrigger" class="content layout-content-inline content-inline  "><div style="" class="content-item content-field item-2   " string_type="field" reserve_space="false"><div class="content-inner "><div class="field-item dataValueRead">Does the caller want a link to the Guest Payment Portal?</div></div></div></div>');
             }
         }
   
