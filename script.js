@@ -35,7 +35,13 @@
         var loop = setInterval(function () {
             if (appWindow.closed) {
                 if (sessionStorage.getItem('messageSuccess') === null && configappt) {
-                    window.parent.sessionStorage.removeItem("autodocmnrgpp");
+                    window.parent.sessionStorage.removeItem("autodocwindow.parent.openGPP");
+                }
+
+                if(sessionStorage.getItem('messageSuccessCc') !== null ) {
+                    document.getElementById('cccbtnyes').checked = true;
+                } else {
+                    document.getElementById('cccbtnyes').checked = false;
                 }
 
                 clearInterval(loop);
@@ -203,6 +209,24 @@ var ezcommCore = {
         }
     }
 
+    function messageEventGppCC(msg) {
+        if(msg.data) {
+            console.log('msg', msg);
+            sessionStorage.setItem('messageSuccessCc', 'success');
+            var data = msg.data.replace("Preference ", "").replace("Override ", "");
+            var isNull = false;
+            if(window.parent.sessionStorage.getItem('autodocmnrgpp') === null) {
+                window.parent.sessionStorage.setItem('autodocmnrgpp', data);
+                isNull = true;
+            } else {
+                appendToStorage('autodocmnrgpp', data);
+
+            }
+            return false;
+        }
+    }
+
+
 
     function appendToStorage(name, data){
         var old = window.parent.sessionStorage.getItem(name);
@@ -217,7 +241,7 @@ var ezcommCore = {
     }
 
 
-     if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment") {
+     if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {
              sessionStorage.setItem('campaignName', pageUrl);
         };
 
@@ -261,6 +285,24 @@ window.parent.openGPP = function() {
         ezcommCore.app.open(config);
         window.parent.addEventListener("message", messageEventGpp, false);
     }
+
+    window.parent.openGPPCc = function() {
+
+        window.parent.removeEventListener("message", messageEventGppCC, false);  
+            var config = {
+                data: {
+                    member: getMemberDataMandR(),
+                    request_metadata: requestMetaDataGPP(),
+                    message: messagesMandR()
+                }
+            }
+            ezcommCore.app.open(config);
+            window.parent.addEventListener("message", messageEventGppCC, false);
+        }
+    
+   
+    
+
         var ezcommButtonVar = setInterval(addEzcommCoreLauncherGPPPayment, 1500);
         function addEzcommCoreLauncherGPPPayment() {
             if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0 &&
@@ -268,21 +310,16 @@ window.parent.openGPP = function() {
                     $('#RULE_KEY > div:nth-child(1) > div > div > div > div > p').append('<button style="margin-bottom:10px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 11px;background:url(/a4me/ezcomm-launcher-maestro-gpp-payment-header/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openGPP()" type="button" id="gpppaymentheader"></button>');
                 }    
       } 
+
+
       var ezcommButtonVarCc = setInterval(addTriggerQuestionCC, 1500);
       function addTriggerQuestionCC() {
-        var EmailCheckRadioButtonContent = '<span class="dataValueWrite" style="height:38px;width:193px;">\
-        <span class="col-3"><input name="optradio" type="radio" value="yes" id="ezcomm-mnr-mail-question-yes" class="Radio ezcomm-mnr-mail-question-buttonappt" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">Yes</label></span>\<span class="col-3"><input name="optradio" type="radio" value="no" id="ezcomm-mnr-mail-question-no" class="ezcomm-mnr-mail-question-buttonappt" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">No</label></span>\
-        <span/>';
         if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("label:contains('Review & Submit Payment Confirmation')").length > 0 && 
         window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#cctrigger").length === 0) {
             if(document.getElementById("pyWorkPageSaveCreditCardInfoNo").checked) {
-                $('#RULE_KEY > div:nth-child(3) > div > div').append('<div style="" id="cctrigger" class="content-item content-field item-1" string_type="field" reserve_space="false"><div class="content-inner "><div class="field-item dataValueRead">Does the caller want a link to the Guest Payment Portal?</div></div></div><div style="" class="content-item content-field item-2   " string_type="field" reserve_space="false"><div class="content-inner "><div class="field-item dataValueWrite"><div class="radioTable"><div><span class="col-3"><input validationtype="required" id="cccbtnyes" type="radio" name="cccbtnyes" value="Yes" class="Radio" style="vertical-align: middle;"><label title=""for="cccbtnyes" class="rb_ rb_standard radioLabel">Yes</label></span><span class="col-3"><input  id="cccbtnno" type="radio" name="cccbtnyes" value="No" class="Radio" style="vertical-align: middle;"><label title="" for="cccbtnno" class="rb_ rb_standard radioLabel">No</label></span></div></div></div></div></div>');
+                $('#RULE_KEY > div:nth-child(3) > div > div').append('<div style="" id="cctrigger" class="content-item content-field item-1" string_type="field" reserve_space="false"><div class="content-inner "><div class="field-item dataValueRead">Does the caller want a link to the Guest Payment Portal?</div></div></div><div style="" class="content-item content-field item-2   " string_type="field" reserve_space="false"><div class="content-inner "><div class="field-item dataValueWrite"><div class="radioTable"><div><span class="col-3"><input validationtype="required" id="cccbtnyes" type="radio" onclick="window.parent.openGPPCc()" name="cccbtnyes" value="Yes" class="Radio" style="vertical-align: middle;"><label title=""for="cccbtnyes" class="rb_ rb_standard radioLabel">Yes</label></span><span class="col-3"><input  id="cccbtnno" type="radio" name="cccbtnyes" value="No" class="Radio" style="vertical-align: middle;"><label title="" for="cccbtnno" class="rb_ rb_standard radioLabel">No</label></span></div></div></div></div></div>');
             }
-        }
-  
-      
-
-        
+        }   
     }
 
 
