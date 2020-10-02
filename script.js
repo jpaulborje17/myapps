@@ -163,8 +163,10 @@
             if (configuration) {
                 if (sessionStorage.getItem('tier1GppAutoDocEzcomm') !== null) { // TODO: Storage name
                     providerTierNotes = sessionStorage.getItem('tier1GppAutoDocEzcomm');
-
-                }                
+                }  
+                if(sessionStorage.getItem('messageSuccessCc') !== null) {
+                    sessionStorage.removeItem('messageSuccessCc');
+                }              
             } 
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
         }
