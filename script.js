@@ -38,7 +38,6 @@
                     if(sessionStorage.getItem('messageSuccessCc') !== null) {
                         $("#cccbtnyes").prop("checked", true);
                     } else {
-                        document.getElementById('cccbtnyes').checked = false;
                         $("#cccbtnyes").prop("checked", false);
                     }
 
