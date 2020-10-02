@@ -34,9 +34,11 @@
 
         var loop = setInterval(function () {
             if (appWindow.closed) {
-                if (sessionStorage.getItem('messageSuccess') === null && configappt) {
-                    window.parent.sessionStorage.removeItem("autodocmnrgpp");
-                }
+               if(sessionStorage.getItem('messageSuccessCc') !== null) {
+                   document.getElementById('cccbtnyes').checked = true;
+               } else {
+                   document.getElementById('cccbtnyes').checked = false;
+               }
 
                 clearInterval(loop);
             }
@@ -210,17 +212,14 @@ var ezcommCore = {
 
     function messageEventGppCC(msg) {
         if(msg.data) {
-            console.log('msg12', msg);
+            console.log('msg', msg);
             sessionStorage.setItem('messageSuccessCc', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "");
-            console.log(data);
             var isNull = false;
             if(window.parent.sessionStorage.getItem('autodocmnrgpp') === null) {
-                console.log('testing');
                 window.parent.sessionStorage.setItem('autodocmnrgpp', data);
                 isNull = true;
             } else {
-                console.log('werwere');
                 appendToStorage('autodocmnrgpp', data);
 
             }
