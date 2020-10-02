@@ -318,10 +318,11 @@ window.parent.openGPP = function() {
         window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#cctrigger").length === 0) {
             if(document.getElementById("pyWorkPageSaveCreditCardInfoNo").checked) {
                 $('#RULE_KEY > div:nth-child(3) > div > div').append('<div style="" id="cctrigger" class="content-item content-field item-1" string_type="field" reserve_space="false"><div class="content-inner "><div class="field-item dataValueRead">Does the caller want a link to the Guest Payment Portal?</div></div></div><div style="" class="content-item content-field item-2   " string_type="field" reserve_space="false"><div class="content-inner "><div class="field-item dataValueWrite"><div class="radioTable"><div><span class="col-3"><input validationtype="required" id="cccbtnyes" type="radio" onclick="window.parent.openGPPCc()" name="cccbtnyes" value="Yes" class="Radio" style="vertical-align: middle;"><label title=""for="cccbtnyes" class="rb_ rb_standard radioLabel">Yes</label></span><span class="col-3"><input  id="cccbtnno" type="radio" name="cccbtnyes" value="No" class="Radio" style="vertical-align: middle;"><label title="" for="cccbtnno" class="rb_ rb_standard radioLabel">No</label></span></div></div></div></div></div>');
+                if(sessionStorage.getItem("messageSuccessCc") !== null) {document.getElementById('ccbtnyes').checked = true} 
             }
         }   
     }
-
+ 
 
 }(jQuery, window, document));
     
