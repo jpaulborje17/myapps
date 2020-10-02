@@ -207,7 +207,7 @@ var ezcommCore = {
                 window.parent.sessionStorage.setItem('autodocmnrgpp', data);
                 isNull = true;
             } else {
-                appendToStorage('autodocmnrgpp', data);
+                appendToStorageGpp('autodocmnrgpp', data);
 
             }
             return false;
@@ -224,7 +224,7 @@ var ezcommCore = {
                 window.parent.sessionStorage.setItem('autodocmnrgpp', data);
                 isNull = true;
             } else {
-                appendToStorage('autodocmnrgpp', data);
+                appendToStorageGpp('autodocmnrgpp', data);
 
             }
             return false;
@@ -232,7 +232,7 @@ var ezcommCore = {
     }
 
 
-    function appendToStorage(name, data){
+    function appendToStorageGpp(name, data){
         var old = window.parent.sessionStorage.getItem(name);
         var oldContainer = "";
         if(old === null) {

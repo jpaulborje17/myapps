@@ -369,10 +369,10 @@
    
     if(pageurl === "AssignPCP"){
         sessionStorage.setItem('campaignName', 'ProviderInfo');
-      /*  $(document).on('DOMSubtreeModified', '.sectionDivStyle', function() {
+     $(document).on('DOMSubtreeModified', '.sectionDivStyle', function() {
             sessionStorage.setItem('campaignName', 'ProviderInfo');
             getHouseHoldId();
-        }); */
+        }); 
 
         window.parent.document.getElementById('l1').addEventListener('click',  function(event) {
     
@@ -389,7 +389,6 @@
     
     
                     if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("label:contains('Provider Information')").length > 0) {
-                        console.log('testinnggg11');
                         householdId = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
                         sessionStorage.setItem('campaignName', 'ProviderInfo');
 
