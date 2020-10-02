@@ -268,7 +268,7 @@ window.parent.openGPP = function() {
                     $('#RULE_KEY > div:nth-child(1) > div > div > div > div > p').append('<button style="margin-bottom:10px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 11px;background:url(/a4me/ezcomm-launcher-maestro-gpp-payment-header/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openGPP()" type="button" id="gpppaymentheader"></button>');
                 }    
       } 
-
+      var ezcommButtonVarCc = setInterval(addTriggerQuestionCC, 1500);
       function addTriggerQuestionCC() {
         var EmailCheckRadioButtonContent = '<span class="dataValueWrite" style="height:38px;width:193px;">\
         <span class="col-3"><input name="optradio" type="radio" value="yes" id="ezcomm-mnr-mail-question-yes" class="Radio ezcomm-mnr-mail-question-buttonappt" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">Yes</label></span>\<span class="col-3"><input name="optradio" type="radio" value="no" id="ezcomm-mnr-mail-question-no" class="ezcomm-mnr-mail-question-buttonappt" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">No</label></span>\
