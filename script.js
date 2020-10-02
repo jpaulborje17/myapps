@@ -276,8 +276,7 @@ window.parent.openGPP = function() {
         if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("label:contains('Review & Submit Payment Confirmation')").length > 0 && 
         window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#newlyAddedQuestionEmailCC").length === 0) {
             if(document.getElementById("pyWorkPageSaveCreditCardInfoNo").checked) {
-                $('#RULE_KEY > div:nth-child(3) > div > div > div.content-item.content-layout.item-1 > div > div > div > div > div.content-item.content-field.item-2 > div').append('<span id="newlyAddedQuestionEmailCC"><td><label class="dataValueWrite a4meDiv" style="vertical-align:middle;">Does the member want to receive provider information via text or email?</label></td>' + EmailCheckRadioButtonContent + '</span>');;
-
+                $('#RULE_KEY > div:nth-child(3) > div > div').append('<div class="field-item dataValueRead">Does the caller want a link to the Guest Payment Portal</div> <div class="radioTable"><div><span class="col-3"><input type="radio" onclick="window.parent.openGPP(); value="Yes" class="Radio" checked="" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">Yes</label></span><span class="col-3"><input id="pyWorkPageSaveCreditCardInfoNo" type="radio" value="No" class="Radio" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">No</label></span></div></div>');
             }
         }
   
@@ -288,3 +287,4 @@ window.parent.openGPP = function() {
 
 
 }(jQuery, window, document));
+
