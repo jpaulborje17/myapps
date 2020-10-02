@@ -25,20 +25,25 @@
 
         var configappt = false;
         var myObj = requestMetaDataGPP().plugins;
-        Object.keys(myObj).forEach(function (key) {
+        Object.keys(myObj).forEach(function(key) {
             if (myObj[key].pluginId === "10" && myObj[key].name === "Autodoc") {
                 configappt = true;
                 console.log('config is ON');
             }
         });
 
-        var loop = setInterval(function () {
+        var loop = setInterval(function() {
             if (appWindow.closed) {
-               if(sessionStorage.getItem('messageSuccessCc') !== null) {
-                   document.getElementById('cccbtnyes').checked = true;
-               } else {
-                   document.getElementById('cccbtnyes').checked = false;
-               }
+                if (appWindow.closed) {
+                    if(sessionStorage.getItem('messageSuccessCc') !== null) {
+                        $("#cccbtnyes").prop("checked", true);
+                    } else {
+                        document.getElementById('cccbtnyes').checked = false;
+                        $("#cccbtnyes").prop("checked", false);
+                    }
+
+                    clearInterval(loop);
+                }
 
                 clearInterval(loop);
             }
