@@ -269,4 +269,21 @@ window.parent.openGPP = function() {
                 }    
       } 
 
+      function addTriggerQuestionCC() {
+        var EmailCheckRadioButtonContent = '<span class="dataValueWrite" style="height:38px;width:193px;">\
+        <span class="col-3"><input name="optradio" type="radio" value="yes" id="ezcomm-mnr-mail-question-yes" class="Radio ezcomm-mnr-mail-question-buttonappt" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">Yes</label></span>\<span class="col-3"><input name="optradio" type="radio" value="no" id="ezcomm-mnr-mail-question-no" class="ezcomm-mnr-mail-question-buttonappt" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">No</label></span>\
+        <span/>';
+        if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("label:contains('Review & Submit Payment Confirmation')").length > 0) {
+            if(document.getElementById("pyWorkPageSaveCreditCardInfoNo").checked) {
+                $('#RULE_KEY > div:nth-child(3) > div > div > div.content-item.content-layout.item-1 > div > div > div > div > div.content-item.content-field.item-2 > div').append('<span id="newlyAddedQuestionEmail"><td><label class="dataValueWrite a4meDiv" style="vertical-align:middle;">Does the member want to receive provider information via text or email?</label></td>' + EmailCheckRadioButtonContent + '</span>');;
+
+            }
+        }
+  
+      
+
+        
+    }
+
+
 }(jQuery, window, document));
