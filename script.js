@@ -278,7 +278,18 @@ var ezcommCore = {
 
 window.parent.openGPP = function() {
 
-    window.parent.removeEventListener("message", messageEventGpp, false);  
+    setTimeout(function() {
+
+        var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
+            function() {
+                return this.id.match(/\d$/);
+            }).filter(function() {
+            return $(this).attr('aria-hidden') == "false"
+        }).contents()[0].id;
+
+
+        if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {
+            window.parent.removeEventListener("message", messageEventGpp, false);  
         var config = {
             data: {
                 member: getMemberDataMandR(),
@@ -288,20 +299,39 @@ window.parent.openGPP = function() {
         }
         ezcommCore.app.open(config);
         window.parent.addEventListener("message", messageEventGpp, false);
+        }
+    }, 2000)
+
+   
     }
 
     window.parent.openGPPCc = function() {
 
-        window.parent.removeEventListener("message", messageEventGppCC, false);
-        var config = {
-            data: {
-                member: getMemberDataMandR(),
-                request_metadata: requestMetaDataGPP(),
-                message: messagesMandR()
+        setTimeout(function() {
+
+            var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
+                function() {
+                    return this.id.match(/\d$/);
+                }).filter(function() {
+                return $(this).attr('aria-hidden') == "false"
+            }).contents()[0].id;
+
+
+            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {
+                window.parent.removeEventListener("message", messageEventGppCC, false);
+                var config = {
+                    data: {
+                        member: getMemberDataMandR(),
+                        request_metadata: requestMetaDataGPP(),
+                        message: messagesMandR()
+                    }
+                }
+                ezcommCore.app.open(config);
+                window.parent.addEventListener("message", messageEventGppCC, false);
+
             }
-        }
-        ezcommCore.app.open(config);
-        window.parent.addEventListener("message", messageEventGppCC, false);
+        }, 2000)
+     
     }
 
 
