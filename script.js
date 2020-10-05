@@ -251,19 +251,34 @@ var ezcommCore = {
 
 
     function appendToStorageGpp(name, data){
-      console.log('s');
+        setTimeout(function() {
+         
+            var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
+                function() {
+                    return this.id.match(/\d$/);
+                }).filter(function() {
+                return $(this).attr('aria-hidden') == "false"
+            }).contents()[0].id;
+
       if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {
-        console.log('23');  
-        var old = window.parent.sessionStorage.getItem(name);
-        var oldContainer = "";
-        if(old === null) {
-            old = "";
-        } 
-        oldContainer = old;
-        var newAuto = data;
-        console.log(newAuto);
-        window.parent.sessionStorage.setItem(name, oldContainer += newAuto);
-      } 
+
+            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {               
+                console.log('s');
+                if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {
+                  console.log('23');  
+                  var old = window.parent.sessionStorage.getItem(name);
+                  var oldContainer = "";
+                  if(old === null) {
+                      old = "";
+                  } 
+                  oldContainer = old;
+                  var newAuto = data;
+                  console.log(newAuto);
+                  window.parent.sessionStorage.setItem(name, oldContainer += newAuto);
+                } 
+             }
+        }, 1800);  
+
     }
 
 
