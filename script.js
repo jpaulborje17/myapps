@@ -198,20 +198,35 @@ var ezcommCore = {
 
 
     function messageEventGpp(msg) {
-        if(msg.data) {
-            console.log('msg', msg);
-            sessionStorage.setItem('messageSuccess', 'success');
-            var data = msg.data.replace("Preference ", "").replace("Override ", "");
-            var isNull = false;
-            if(window.parent.sessionStorage.getItem('autodocmnrgpp') === null) {
-                window.parent.sessionStorage.setItem('autodocmnrgpp', data);
-                isNull = true;
-            } else {
-                appendToStorageGpp('autodocmnrgpp', data);
 
+        setTimeout(function() {
+         
+            var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
+                function() {
+                    return this.id.match(/\d$/);
+                }).filter(function() {
+                return $(this).attr('aria-hidden') == "false"
+            }).contents()[0].id;
+
+
+            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {               
+                if(msg.data) {
+                    console.log('msg', msg);
+                    sessionStorage.setItem('messageSuccess', 'success');
+                    var data = msg.data.replace("Preference ", "").replace("Override ", "");
+                    var isNull = false;
+                    if(window.parent.sessionStorage.getItem('autodocmnrgpp') === null) {
+                        window.parent.sessionStorage.setItem('autodocmnrgpp', data);
+                        isNull = true;
+                    } else {
+                        appendToStorageGpp('autodocmnrgpp', data);
+        
+                    }
+                    return false;
+                }
             }
-            return false;
-        }
+
+        }, 2000);       
     }
 
     function messageEventGppCC(msg) {
