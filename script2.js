@@ -260,27 +260,27 @@
 
   //  window.parent.document.getElementById('l1').addEventListener('click', loaded, false);
 
+    var deleteLink = document.querySelectorAll('.layout-noheader-interaction_tabs .Header_nav');
 
-    document.querySelectorAll('.layout-noheader-interaction_tabs .Header_nav').forEach(function(){
-       
-        setTimeout(function() {
+    for (var i = 0; i < deleteLink.length; i++) {
+        deleteLink[i].addEventListener('click', function(event) {
+            setTimeout(function() {
 
-            var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
-                function() {
-                    return this.id.match(/\d$/);
-                }).filter(function() {
-                return $(this).attr('aria-hidden') == "false"
-            }).contents()[0].id;
+                var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
+                    function() {
+                        return this.id.match(/\d$/);
+                    }).filter(function() {
+                    return $(this).attr('aria-hidden') == "false"
+                }).contents()[0].id;
 
 
-            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {
-                householdIdGpp = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
-                sessionStorage.setItem('campaignName', pageUrl);
-            }
-        }, 2000)
-    }); 
-       
-    
+                if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {
+                    householdIdGpp = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
+                    sessionStorage.setItem('campaignName', pageUrl);
+                }
+            }, 2000)
+        });
+    }
 
   /*  function loaded(event) {
 
