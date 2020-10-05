@@ -153,7 +153,7 @@
                 sessionStorage.removeItem('autodocmnrgpp');
                 if (sessionStorage.getItem('messageSuccessCc') !== null) {
                     sessionStorage.removeItem('messageSuccessCc');
-                    if(sessionStorage.getItem('gppNo' !== null)) {
+                    if(sessionStorage.getItem('gppNo') !== null) {
                         sessionStorage.removeItem('gppNo');
                     }
                 }
