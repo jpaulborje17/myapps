@@ -288,6 +288,7 @@
         // event.stopPropagation();
         // event.stopImmediatePropagation();
         event.preventDefault();
+        console.log('wwwwww');
  
          setTimeout(function() {
  
