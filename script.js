@@ -199,38 +199,41 @@ var ezcommCore = {
 
 
     function messageEventGpp(msg) {
-      if(msg.data) {
-        setTimeout(function() {
-         
-            var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
-                function() {
-                    return this.id.match(/\d$/);
-                }).filter(function() {
-                return $(this).attr('aria-hidden') == "false"
-            }).contents()[0].id;
-
-
-            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("label:contains('Make a Payment')").length > 0) {  
-                if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {              
-               
-                    console.log('msg', msg);
-                    sessionStorage.setItem('messageSuccess', 'success');
-                    var data = msg.data.replace("Preference ", "").replace("Override ", "");
-                    var isNull = false;
-                    if(window.parent.sessionStorage.getItem('autodocmnrgpp') === null) {
-                        window.parent.sessionStorage.setItem('autodocmnrgpp', data);
-                        isNull = true;
-                    } else {
-                        appendToStorageGpp('autodocmnrgpp', data);
-        
-                    }
-                    return false;
-                }
-            }           
+     if(switchtab) {
+        if(msg.data) {
+            setTimeout(function() {
+             
+                var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
+                    function() {
+                        return this.id.match(/\d$/);
+                    }).filter(function() {
+                    return $(this).attr('aria-hidden') == "false"
+                }).contents()[0].id;
+    
+    
+                if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("label:contains('Make a Payment')").length > 0) {  
+                    if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {              
+                   
+                        console.log('msg', msg);
+                        sessionStorage.setItem('messageSuccess', 'success');
+                        var data = msg.data.replace("Preference ", "").replace("Override ", "");
+                        var isNull = false;
+                        if(window.parent.sessionStorage.getItem('autodocmnrgpp') === null) {
+                            window.parent.sessionStorage.setItem('autodocmnrgpp', data);
+                            isNull = true;
+                        } else {
+                            appendToStorageGpp('autodocmnrgpp', data);
             
-
-        }, 2000);  
-    }   
+                        }
+                        return false;
+                    }
+                }           
+                
+    
+            }, 2000);  
+        } 
+     }   
+  
             
     }
 
