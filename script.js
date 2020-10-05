@@ -197,7 +197,7 @@ var ezcommCore = {
         }
     };
 
-    function msgsgpp() {
+    function msgsgpp(msg) {
         if(msg.data) {
             setTimeout(function() {
              
@@ -236,9 +236,9 @@ var ezcommCore = {
 
     function messageEventGpp(msg) {
      if(switchtab) {
-        msgsgpp();       
+        msgsgpp(msg);       
      } else {
-        msgsgpp();
+        msgsgpp(msg);
      }            
     }
 
