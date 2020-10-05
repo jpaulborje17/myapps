@@ -260,7 +260,7 @@
 
   //  window.parent.document.getElementById('l1').addEventListener('click', loaded, false);
 
-    var deleteLink = document.querySelectorAll('.layout-noheader-interaction_tabs .Header_nav');
+    var deleteLink = window.parent.document.querySelectorAll('.layout-noheader-interaction_tabs .Header_nav');
 
     for (var i = 0; i < deleteLink.length; i++) {
         deleteLink[i].addEventListener('click', function(event) {
@@ -278,7 +278,7 @@
                     console.log('sdfsdf');
                     householdIdGpp = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
                     console.log(householdIdGpp);
-                    sessionStorage.setItem('campaignName', pageUrl);
+                  //  sessionStorage.setItem('campaignName', pageUrl);
                 }
             }, 2000)
         });
