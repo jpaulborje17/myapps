@@ -251,6 +251,9 @@ var ezcommCore = {
 
 
     function appendToStorageGpp(name, data){
+      console.log('s');
+      if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {
+        console.log('23');  
         var old = window.parent.sessionStorage.getItem(name);
         var oldContainer = "";
         if(old === null) {
@@ -260,6 +263,7 @@ var ezcommCore = {
         var newAuto = data;
         console.log(newAuto);
         window.parent.sessionStorage.setItem(name, oldContainer += newAuto);
+      } 
     }
 
 
