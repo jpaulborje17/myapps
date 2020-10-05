@@ -261,7 +261,7 @@ var ezcommCore = {
             }).contents()[0].id;
 
 
-            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {               
+            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("label:contains('Make a Payment')").length > 0) {               
                 console.log('s');
                 if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {
                   console.log('23');  
