@@ -275,7 +275,9 @@
 
 
                 if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {
+                    console.log('sdfsdf');
                     householdIdGpp = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
+                    console.log(householdIdGpp);
                     sessionStorage.setItem('campaignName', pageUrl);
                 }
             }, 2000)
