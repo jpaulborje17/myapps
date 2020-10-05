@@ -208,9 +208,9 @@ var ezcommCore = {
                 return $(this).attr('aria-hidden') == "false"
             }).contents()[0].id;
 
-      if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {
 
-            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {               
+            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("label:contains('Make a Payment')").length > 0) {  
+                if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {              
                 if(msg.data) {
                     console.log('msg', msg);
                     sessionStorage.setItem('messageSuccess', 'success');
@@ -225,7 +225,15 @@ var ezcommCore = {
                     }
                     return false;
                 }
+            
+            
+            
+            
+            
             }
+            
+            }
+
              
         }
         }, 2000);  
