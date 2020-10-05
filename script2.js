@@ -285,8 +285,8 @@
     } */
 
     window.parent.$(".layout-noheader-interaction_tabs .Header_nav").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+       // event.stopPropagation();
+       // event.stopImmediatePropagation();
 
         setTimeout(function() {
 
