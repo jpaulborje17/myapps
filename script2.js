@@ -284,7 +284,7 @@
         });
     } */
 
-    window.parent.$(".layout-noheader-interaction_tabs .CPMRecentTab").on('click', function(event){
+    window.parent.$('div[node_name="CPMPortalRecent"]').on('click', function(event){
         // event.stopPropagation();
         // event.stopImmediatePropagation();
         event.preventDefault();
