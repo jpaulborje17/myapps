@@ -333,8 +333,8 @@ window.parent.openGPP = function() {
         }).contents()[0].id;
 
 
-        if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {
-            window.parent.removeEventListener("message", messageEventGpp, false);  
+        if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("label:contains('Make a Payment')").length > 0) {
+        window.parent.removeEventListener("message", messageEventGpp, false);  
         var config = {
             data: {
                 member: getMemberDataMandR(),
