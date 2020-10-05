@@ -308,7 +308,7 @@
     };
 
     window.parent.gppNo = function() {
-        sessionStorage.setItem('gppNo');
+        sessionStorage.setItem('gppNo', 'gppNoBtn');
     }
 
 
