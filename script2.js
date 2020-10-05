@@ -143,13 +143,19 @@
     if (document.forms[0].elements["TaskSectionReference"] !== undefined) {
 
         if (document.forms[0].elements["TaskSectionReference"].value == "Tier1CompletionDetails") {
+
+
             if (sessionStorage.getItem('autodocmnrgpp') === null) {
                 sessionStorage.removeItem('tier1GppAutoDocEzcomm');
+                sessionStorage.removeItem('gppNo');
             } else {
                 sessionStorage.setItem('tier1GppAutoDocEzcomm', sessionStorage.getItem('autodocmnrgpp'));
                 sessionStorage.removeItem('autodocmnrgpp');
                 if (sessionStorage.getItem('messageSuccessCc') !== null) {
                     sessionStorage.removeItem('messageSuccessCc');
+                    if(sessionStorage.getItem('gppNo' !== null)) {
+                        sessionStorage.removeItem('gppNo');
+                    }
                 }
             }
 
@@ -308,6 +314,7 @@
     };
 
     window.parent.gppNo = function() {
+
         sessionStorage.setItem('gppNo', 'gppNoBtn');
     }
 
