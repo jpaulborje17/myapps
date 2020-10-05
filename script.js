@@ -226,9 +226,10 @@ var ezcommCore = {
                     return false;
                 }
             }
-
+             
+        }
         }, 2000);  
-       }       
+            
     }
 
     function messageEventGppCC(msg) {
