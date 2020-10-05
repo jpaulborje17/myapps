@@ -284,30 +284,31 @@
         });
     } */
 
-    window.parent.$(".layout-noheader-interaction_tabs .Header_nav").on('click', function(event){
-       // event.stopPropagation();
-       // event.stopImmediatePropagation();
-
-        setTimeout(function() {
-
-            var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
-                function() {
-                    return this.id.match(/\d$/);
-                }).filter(function() {
-                return $(this).attr('aria-hidden') == "false"
-            }).contents()[0].id;
-
-
-            if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {
-                console.log('sdfsdf');
-                householdIdGpp = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
-                console.log(householdIdGpp);
-              //  sessionStorage.setItem('campaignName', pageUrl);
-            }
-        }, 2000)
-
-        //(... rest of your JS code)
-    });
+    window.parent.$(".layout-noheader-interaction_tabs .CPMRecentTab").on('click', function(event){
+        // event.stopPropagation();
+        // event.stopImmediatePropagation();
+        event.preventDefault();
+ 
+         setTimeout(function() {
+ 
+             var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
+                 function() {
+                     return this.id.match(/\d$/);
+                 }).filter(function() {
+                 return $(this).attr('aria-hidden') == "false"
+             }).contents()[0].id;
+ 
+ 
+             if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {
+                 console.log('sdfsdf');
+                 householdIdGpp = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
+                 console.log(householdIdGpp);
+               //  sessionStorage.setItem('campaignName', pageUrl);
+             }
+         }, 1500)
+ 
+         //(... rest of your JS code)
+     });
 
   /*  function loaded(event) {
 
