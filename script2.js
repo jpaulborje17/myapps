@@ -290,6 +290,8 @@
         event.preventDefault();
         console.log('wwwwww');
  
+        alert($(event.target).attr('class'));
+
          setTimeout(function() {
  
              var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
