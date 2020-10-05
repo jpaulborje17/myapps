@@ -197,9 +197,7 @@ var ezcommCore = {
         }
     };
 
-
-    function messageEventGpp(msg) {
-     if(switchtab) {
+    function msgsgpp() {
         if(msg.data) {
             setTimeout(function() {
              
@@ -232,9 +230,16 @@ var ezcommCore = {
     
             }, 2000);  
         } 
-     }   
-  
-            
+
+    }
+
+
+    function messageEventGpp(msg) {
+     if(switchtab) {
+        msgsgpp();       
+     } else {
+        msgsgpp();
+     }            
     }
 
     function messageEventGppCC(msg) {
