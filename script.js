@@ -3,6 +3,7 @@
     'use strict';
     // Get member sessionStorage from maestro
     var pageUrl;
+    var switchtab = false;
     if(document.forms[0].elements["TaskSectionReference"] !== undefined) {
         pageUrl = document.forms[0].elements["TaskSectionReference"].value;
     } else {
@@ -17,7 +18,7 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
     var householdIdGpp;
-
+  
     householdIdGpp = window.parent.$('iframe[id=' + activeTier1IframeId + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
 
     function launchWinMnR() {
@@ -198,7 +199,7 @@ var ezcommCore = {
 
 
     function messageEventGpp(msg) {
-
+      if(msg.data) {
         setTimeout(function() {
          
             var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
@@ -211,7 +212,7 @@ var ezcommCore = {
 
             if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("label:contains('Make a Payment')").length > 0) {  
                 if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {              
-                if(msg.data) {
+               
                     console.log('msg', msg);
                     sessionStorage.setItem('messageSuccess', 'success');
                     var data = msg.data.replace("Preference ", "").replace("Override ", "");
@@ -225,18 +226,11 @@ var ezcommCore = {
                     }
                     return false;
                 }
+            }           
             
-            
-            
-            
-            
-            }
-            
-            }
 
-             
-        
         }, 2000);  
+    }   
             
     }
 
@@ -313,6 +307,7 @@ var ezcommCore = {
                 if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {
                     householdIdGpp = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
                     sessionStorage.setItem('campaignName', pageUrl);
+                    switchtab = true;
                 }
             }, 2000)
 
@@ -334,7 +329,7 @@ window.parent.openGPP = function() {
 
 
         if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("label:contains('Make a Payment')").length > 0) {
-        window.parent.removeEventListener("message", messageEventGpp, false);  
+         window.parent.removeEventListener("message", messageEventGpp, false);  
         var config = {
             data: {
                 member: getMemberDataMandR(),
