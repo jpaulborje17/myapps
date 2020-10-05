@@ -260,7 +260,6 @@ var ezcommCore = {
                 return $(this).attr('aria-hidden') == "false"
             }).contents()[0].id;
 
-      if (pageUrl == "MakeAPayment_GPSCC" || pageUrl == "UHG-MedRet-IIM-Work-MakeAPayment" || pageUrl == "PaymentConfirmation_GPSCC") {
 
             if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('None of the cases found are related to the current inquiry')").length > 0) {               
                 console.log('s');
@@ -277,6 +276,7 @@ var ezcommCore = {
                   window.parent.sessionStorage.setItem(name, oldContainer += newAuto);
                 } 
              }
+              
         }, 1800);  
 
     }
