@@ -12,10 +12,7 @@ $(document).ready(function() {
         }).filter(function() {
         return $(this).attr('aria-hidden') == "false"
     }).contents()[0].id;
-    var householdIdReviews;
-
-    householdIdReviews = window.parent.$('iframe[id=' + activeTier1IframeId + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
-
+   
     var ezcommButtonVar = setInterval(addEzcommCoreLauncherButton, 2000);
 
     window.parent.openEzcommApp = function() {
@@ -88,7 +85,6 @@ $(document).ready(function() {
         window.open("/a4me/ezcomm-core-v2/", "a4meEZCommWindow", 'location=no,height=600,width=1000,scrollbars=1').focus();
 
     };
-
 
     function addEzcommCoreLauncherButton() {
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("span:contains('Contract Number')").length > 0 &&
