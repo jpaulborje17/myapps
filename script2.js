@@ -2,6 +2,7 @@
 
     'use strict';
     // Get member sessionStorage from maestro
+    alert('testin')
     var pageUrl;
     if (document.forms[0].elements["TaskSectionReference"] !== undefined) {
         pageUrl = document.forms[0].elements["TaskSectionReference"].value;
@@ -316,7 +317,7 @@
     function addTriggerQuestionCC() {
         if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("label:contains('Review & Submit Payment Confirmation')").length > 0 &&
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#cctrigger").length === 0) {
-            if (document.getElementById("pyWorkPageSaveCreditCardInfoNo").checked) {
+            if($('#pyWorkPageSaveCreditCardInfoNo').is(':checked')) {
                 $('#pyWorkPageSaveCreditCardInfoNo').parent().addClass('weeewew').prev().addClass('s').parent().parent().addClass('1').parent().parent().parent().addClass('11').prev().parent().append('<div style="" id="cctrigger" class="content-item content-field item-1" string_type="field" reserve_space="false"><div class="content-inner "><div class="field-item dataValueRead">Does the caller want a link to the Guest Payment Portal?</div></div></div><div style="" class="content-item content-field item-2   " string_type="field" reserve_space="false"><div class="content-inner "><div class="field-item dataValueWrite"><div class="radioTable"><div><span class="col-3"><input id="cccbtnyes" type="radio" onclick="window.parent.openGPPCc()" name="cccbtnyes" value="Yes" class="Radio" style="vertical-align: middle;"><label title=""for="cccbtnyes" class="rb_ rb_standard radioLabel">Yes</label></span><span class="col-3"><input onclick="window.parent.gppNo()"  id="cccbtnno" type="radio" name="cccbtnyes" value="No" class="Radio" style="vertical-align: middle;"><label title="" for="cccbtnno" class="rb_ rb_standard radioLabel">No</label></span></div></div></div></div></div>');
                 if (sessionStorage.getItem("messageSuccessCc") !== null) {
                     document.getElementById('cccbtnyes').checked = true
