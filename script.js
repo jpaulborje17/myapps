@@ -2,7 +2,6 @@
 
     'use strict';
     // Get member sessionStorage from maestro
-    alert('testin')
     var pageUrl;
     if (document.forms[0].elements["TaskSectionReference"] !== undefined) {
         pageUrl = document.forms[0].elements["TaskSectionReference"].value;
@@ -290,17 +289,15 @@
         sessionStorage.setItem('gppNo', 'gppNoBtn');
     };
 
-
-
     var ezcommButtonVar = setInterval(addEzcommCoreLauncherGPPPayment, 1500);
 
     function addEzcommCoreLauncherGPPPayment() {
         if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("label:contains('Make a Payment')").length > 0 &&
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#gpppaymentheader").length === 0) {
-            window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("div:contains('Does the member have an Employer Group Plan?')").after('<button style="margin-bottom:10px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 11px;background:url(/a4me/ezcomm-launcher-maestro-gpp-payment-header/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openGPP()" type="button" id="gpppaymentheader"></button>');
+            $('#RULE_KEY > div:nth-child(1) > div > div > div > div > p:nth-child(1)').append('<button style="margin-bottom:10px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 11px;background:url(/a4me/ezcomm-launcher-maestro-gpp-payment-header/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openGPP()" type="button" id="gpppaymentheader"></button>');
         }
     }
-  
+
 
     // EFT Payment header start
     var ezcommButtonEftVar = setInterval(addEzcommCoreLauncherGPPPaymentEft, 1500);
