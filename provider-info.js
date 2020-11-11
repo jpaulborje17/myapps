@@ -326,17 +326,23 @@
 
             if(configuration){
                 if(sessionStorage.getItem('autodocmnrprovider') !== null) {
-                    providerTierNotes = sessionStorage.getItem('autodocmnrprovider');
+                    sessionStorage.setItem('tier1ProvInfoAutoDocEzcomm', sessionStorage.getItem('autodocmnrprovider'));
+                    sessionStorage.removeItem('autodocmnrprovider');
+                    providerTierNotes = sessionStorage.getItem('tier1ProvInfoAutoDocEzcomm');
 
                     if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN"  ) {
                         sessionStorage.removeItem('QuestionradioStatus');
                         sessionStorage.removeItem('schedprov');
                     }
 
+                    if (sessionStorage.getItem('messageSuccess') !== null) {
+                        sessionStorage.removeItem('messageSuccess');
+                    } 
+                   
                 } else {
                     var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
                     if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes") ) {
-
+                        sessionStorage.removeItem("tier1ProvInfoAutoDocEzcomm");
                         if(sessionStorage.getItem('optout') !== null) {
                             providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
                                 + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
@@ -350,7 +356,11 @@
                     sessionStorage.removeItem('schedprov');
                 }
             }
+
+
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
+
+
         }
     }
 
