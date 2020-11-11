@@ -4,12 +4,9 @@
     'use strict';
     // Get member sessionStorage from maestro
     var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
-    var houseHoldNum;
     var ezcommCommunications;
     var pageurl = document.forms[0].elements["TaskSectionReference"].value;
-    var reset = false;
     var householdId = getAttributeValue("pyWorkPage", "MemberID");
-
 
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function() {
@@ -18,6 +15,7 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
 
+    var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
 
     function isAutodocMnrNotEmpty() {
         if(sessionStorage.getItem('optout') !== null) {
@@ -27,8 +25,8 @@
 
     function checkIfReset(){
 
-        if(sessionStorage.getItem('autodocmnrprovider') !== null && sessionStorage.getItem('QuestionradioStatus') === 'OPT_IN') {
-            window.parent.sessionStorage.removeItem('autodocmnrprovider');
+        if(sessionStorage.getItem(sCase) !== null && sessionStorage.getItem('QuestionradioStatus') === 'OPT_IN') {
+            window.parent.sessionStorage.removeItem(sCase);
             window.parent.sessionStorage.removeItem('messageSuccess');
             reset = true;
         }
@@ -310,10 +308,9 @@
             });
 
             if(configuration){
-                if(sessionStorage.getItem('autodocmnrprovider') !== null) {
-                    sessionStorage.setItem('tier1ProvInfoAutoDocEzcomm', sessionStorage.getItem('autodocmnrprovider'));
-                    sessionStorage.removeItem('autodocmnrprovider');
-                    providerTierNotes = sessionStorage.getItem('tier1ProvInfoAutoDocEzcomm');
+                if(sessionStorage.getItem(sCase) !== null) {
+                    providerTierNotes = sessionStorage.getItem(sCase);
+                  //  sessionStorage.removeItem(sCase);
 
                     if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN"  ) {
                         sessionStorage.removeItem('QuestionradioStatus');
@@ -393,12 +390,12 @@
             sessionStorage.setItem('messageSuccess', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "").replace(additionalAutoDoc, "");
             var isNull = false;
-            if(window.parent.sessionStorage.getItem('autodocmnrprovider') === null) {
-                window.parent.sessionStorage.setItem('autodocmnrprovider', data + additionalAutoDoc);
+            if(window.parent.sessionStorage.getItem(sCase) === null) {
+                window.parent.sessionStorage.setItem(sCase, data + additionalAutoDoc);
                 isNull = true;
             }
             else {
-                appendToStorage('autodocmnrprovider', data, additionalAutoDoc);
+                appendToStorage(sCase, data, additionalAutoDoc);
 
             }
             return false;
@@ -452,7 +449,7 @@
             }
 
         } else {
-            if(sessionStorage.getItem('autodocmnrprovider') === null) {
+            if(sessionStorage.getItem(sCase) === null) {
                 window.parent.sessionStorage.setItem('optout', 'optoutautodoc');
                 window.parent.sessionStorage.setItem("QuestionradioStatus", "OPT_OUT");
             }
