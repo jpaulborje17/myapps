@@ -292,13 +292,11 @@
     var providerTierNotes = '';
     if (document.forms[0].elements["TaskSectionReference"].value == "Tier1CompletionDetails") {
 
-       
 
 
         //TODO: ADD OPT_IN MESSAGE HERE..
-        if(sessionStorage.getItem("campaignName") === "ProviderInfo") {
-            var sCaseTier1 = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-            console.log('ddfdf' + sCaseTier1);
+            var sCaseTier = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+            console.log('scase Tier1 Page ' + sCaseTier);
 
             var configuration = false;
             var myObj = requestMetaDataMandR().plugins;
@@ -314,9 +312,11 @@
 
             if(configuration){
                 if(sessionStorage.getItem(sCase) !== null) {
-                    providerTierNotes = sessionStorage.getItem(sCase);
-                  //  sessionStorage.removeItem(sCase);
 
+                  if(sCaseTier === sCase) {
+                    providerTierNotes = sessionStorage.getItem(sCase);
+                  }
+                  
                     if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN"  ) {
                         sessionStorage.removeItem('QuestionradioStatus');
                         sessionStorage.removeItem('schedprov');
@@ -346,9 +346,6 @@
 
 
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
-
-
-        }
     }
 
     $(document).on('DOMSubtreeModified', '#pyFlowActionHTML div ', function() {
