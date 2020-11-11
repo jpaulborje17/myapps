@@ -292,13 +292,13 @@
     var providerTierNotes = '';
     if (document.forms[0].elements["TaskSectionReference"].value == "Tier1CompletionDetails") {
 
-        var sCaseTier1 = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-        console.log(sCaseTier1);
+       
 
 
         //TODO: ADD OPT_IN MESSAGE HERE..
         if(sessionStorage.getItem("campaignName") === "ProviderInfo") {
-
+            var sCaseTier1 = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+            console.log('ddfdf' + sCaseTier1);
 
             var configuration = false;
             var myObj = requestMetaDataMandR().plugins;
