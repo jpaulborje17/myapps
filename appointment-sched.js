@@ -259,6 +259,7 @@
                 if (sessionStorage.getItem(sCaseAppt) !== null) {
 
                     if(sCaseTier1Appt === sCaseAppt) {
+                        console.log('equal');
                         providerTierNotes = sessionStorage.getItem(sCaseAppt);
                     }
 
