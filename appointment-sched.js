@@ -20,9 +20,9 @@
     var sCaseAppt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
 
 
-    function isAutodocMnrNotEmpty() {
+    function isAutodocMnrNotEmpty() {    
         if(sessionStorage.getItem('optoutappt') !== null) {
-          sessionStorage.removeItem('optoutappt');
+            sessionStorage.removeItem('optoutappt');
         }
     }
 
@@ -131,7 +131,7 @@
         plugin2.pluginId = "10";
         plugin2.name = "Autodoc";
         plugin2.params = {
-          additionalAutoDoc: detail
+            additionalAutoDoc: detail
         };
 
         sessionStorage.setItem('schedproviders', detail);
@@ -242,8 +242,9 @@
     var providerTierNotes = '';
     if (document.forms[0].elements["TaskSectionReference"].value == "Tier1CompletionDetails") {
 
-        //TODO: ADD OPT_IN MESSAGE HERE..
-            var sCaseTier1Appt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+        var sCaseTier1Appt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+
+        //TODO: ADD OPT_IN MESSAGE HERE..s
             var configuration = false;
             var myObj = requestMetaDataMandRAppt().plugins;
             Object.keys(myObj).forEach(function (key) {
@@ -272,7 +273,7 @@
 
                         if(sessionStorage.getItem('optoutappt') !== null) {
                             providerTierNotes = "***Appointment Schedule Email Message Opt-in: No, " + getCurrentDateTime() + "***\n" +
-                                "***Appointment Schedule SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
+                               "***Appointment Schedule SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
                             sessionStorage.removeItem('QuestionRadioStatusAppt');
                         }
                     }
@@ -284,7 +285,6 @@
                 }
             }
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
-        
     }
 
     var ezcommCore = {
@@ -437,42 +437,6 @@
 
             }
         }
-    }
-
-   
-
-    if (pageUrl == "ScheduleAppointment") {
-        sessionStorage.setItem('campaignName', 'AppointmentSched');
-
-      /*  $(document).on('DOMSubtreeModified', '.sectionDivStyle', function() {
-            sessionStorage.setItem('campaignName', 'AppointmentSched');
-            get HouseHoldIdAppt();
-        }); */
- 
-        window.parent.document.getElementById('l1').addEventListener('click',  function(event) {
-    
-            if (event.target.matches('.layout-noheader-interaction_tabs .Header_nav')) {
-    
-                setTimeout(function() {
-    
-                    var activeTier1IframeIds = window.parent.$('div[id^="PegaWebGadget"]').filter(
-                        function() {
-                            return this.id.match(/\d$/);
-                        }).filter(function() {
-                        return $(this).attr('aria-hidden') == "false"
-                    }).contents()[0].id;
-    
-    
-                    if (window.parent.$('iframe[id=' + activeTier1IframeIds + ']').contents().find("span:contains('Plan Type')").length > 0) {
-                        householdIdSched = window.parent.$('iframe[id=' + activeTier1IframeIds + ']')[0].contentWindow.getAttributeValue("pyWorkPage", "MemberID");
-                        sessionStorage.setItem('campaignName', 'AppointmentSched');
-                    }
-                }, 2000)
-    
-            }
-    
-        }, false);
-           
     }
 
 }(jQuery, window, document));
