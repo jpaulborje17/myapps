@@ -20,24 +20,9 @@
 
 
     function isAutodocMnrNotEmpty() {
-        if(sessionStorage.getItem('autodocmnrprovider') !== null && sessionStorage.getItem('QuestionradioStatus') !== 'OPT_IN') {
-            window.parent.sessionStorage.removeItem('autodocmnrprovider'); // autodoc
-            window.parent.sessionStorage.removeItem('messageSuccess');
-
-            if(sessionStorage.getItem('optout') !== null) {
-                sessionStorage.removeItem('optout');
-            }
-
-            console.log(sessionStorage.getItem('autodocmnrprovider'));
-        } else if(sessionStorage.getItem('autodocmnrprovider') === null && sessionStorage.getItem('QuestionradioStatus') !== 'OPT_IN') {
-            window.parent.sessionStorage.removeItem('autodocmnrprovider');
-            window.parent.sessionStorage.removeItem('messageSuccess');
-
-            if(sessionStorage.getItem('optout') !== null) {
-                sessionStorage.removeItem('optout');
-            }
+        if(sessionStorage.getItem('optout') !== null) {
+            sessionStorage.removeItem('optout');
         }
-        return false;
     }
 
     function checkIfReset(){
