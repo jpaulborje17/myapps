@@ -17,29 +17,18 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
 
+    var sCaseAppt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+
+
     function isAutodocMnrNotEmpty() {
-        if (sessionStorage.getItem('autodocmnrappt') !== null && sessionStorage.getItem('QuestionRadioStatusAppt') !== 'OPT_IN') {
-            window.parent.sessionStorage.removeItem('autodocmnrappt');
-            window.parent.sessionStorage.removeItem('messageSuccess');
-
-            if(sessionStorage.getItem('optoutappt') !== null) {
-                sessionStorage.removeItem('optoutappt');
-            }
-
-        } else if(sessionStorage.getItem('autodocmnrappt') === null && sessionStorage.getItem('QuestionRadioStatusAppt') !== 'OPT_IN') {
-            window.parent.sessionStorage.removeItem('autodocmnrappt');
-            window.parent.sessionStorage.removeItem('messageSuccess');
-
-            if(sessionStorage.getItem('optoutappt') !== null) {
-                sessionStorage.removeItem('optoutappt');
-            }
+        if(sessionStorage.getItem('optoutappt') !== null) {
+          sessionStorage.removeItem('optoutappt');
         }
-        return false;
     }
 
     function checkIfReset(){
-        if(sessionStorage.getItem('autodocmnrappt') !== null && sessionStorage.getItem('QuestionRadioStatusAppt') === 'OPT_IN') {
-            window.parent.sessionStorage.removeItem('autodocmnrappt');
+        if(sessionStorage.getItem(sCaseAppt) !== null && sessionStorage.getItem('QuestionRadioStatusAppt') === 'OPT_IN') {
+            window.parent.sessionStorage.removeItem(sCaseAppt);
             window.parent.sessionStorage.removeItem('messageSuccess');
             reset = true;
         }
@@ -253,9 +242,8 @@
     var providerTierNotes = '';
     if (document.forms[0].elements["TaskSectionReference"].value == "Tier1CompletionDetails") {
 
-        //TODO: ADD OPT_IN MESSAGE HERE..s
-        if(sessionStorage.getItem('campaignName') === "AppointmentSched") {
-
+        //TODO: ADD OPT_IN MESSAGE HERE..
+            var sCaseTier1Appt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
             var configuration = false;
             var myObj = requestMetaDataMandRAppt().plugins;
             Object.keys(myObj).forEach(function (key) {
@@ -267,8 +255,11 @@
             });
 
             if (configuration) {
-                if (sessionStorage.getItem('autodocmnrappt') !== null) {
-                    providerTierNotes = sessionStorage.getItem('autodocmnrappt');
+                if (sessionStorage.getItem(sCaseAppt) !== null) {
+
+                    if(sCaseTier1Appt === sCaseAppt) {
+                        providerTierNotes = sessionStorage.getItem(sCaseAppt);
+                    }
 
                     if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN"  ) {
                         sessionStorage.removeItem('QuestionRadioStatusAppt');
@@ -293,7 +284,7 @@
                 }
             }
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
-        }
+        
     }
 
     var ezcommCore = {
@@ -324,12 +315,12 @@
             sessionStorage.setItem('messageSuccess', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "").replace(additionalAutoDoc, "");
             var isNull = false;
-            if(window.parent.sessionStorage.getItem('autodocmnrappt') === null) {
-                window.parent.sessionStorage.setItem('autodocmnrappt', data + additionalAutoDoc);
+            if(window.parent.sessionStorage.getItem(sCaseAppt) === null) {
+                window.parent.sessionStorage.setItem(sCaseAppt, data + additionalAutoDoc);
                 isNull = true;
             }
             else {
-                appendToStorage('autodocmnrappt', data, additionalAutoDoc);
+                appendToStorage(sCaseAppt, data, additionalAutoDoc);
 
             }
             return false;
@@ -384,7 +375,7 @@
                 }
             }
             else {
-                if (sessionStorage.getItem('autodocmnrappt') === null) {
+                if (sessionStorage.getItem(sCaseAppt) === null) {
                     window.parent.sessionStorage.setItem('optoutappt', 'optoutautodoc')
                     window.parent.sessionStorage.setItem("QuestionRadioStatusAppt", "OPT_OUT");
                 }
