@@ -9,6 +9,7 @@
     var reset = false;
     var householdIdSched;
     householdIdSched = getAttributeValue("pyWorkPage", "MemberID");
+    sessionStorage.setItem("campaignName", "Schedule Appointment");
 
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function () {
@@ -18,23 +19,7 @@
     }).contents()[0].id;
 
     var sCaseAppt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-    console.log('appointment page ' + sCaseAppt);
 
-
-    function getScaseTier1Appt() {
-        var scaseId = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-        
-        for (let i=0; i< sessionStorage.length; i++) {
-            let key = sessionStorage.key(i);
-        
-            if(key === scaseId) {
-               return true;
-            }
-                                   
-           }
-          return false;
-     } 
-        
 
     function isAutodocMnrNotEmpty() {
         if(sessionStorage.getItem('optoutappt') !== null) {
@@ -260,8 +245,6 @@
 
         var sCaseTier1Appt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
 
-        console.log('title autodoc page ' + sCaseTier1Appt);
-
         //TODO: ADD OPT_IN MESSAGE HERE..s
         var configuration = false;
         var myObj = requestMetaDataMandRAppt().plugins;
@@ -273,17 +256,20 @@
             }
         });
 
-        if (configuration) {
+        if(sessionStorage.getItem("campaignName") === "Schedule Appointment") {
+          console.log('campaignname');
+          if (configuration) {
             if (sessionStorage.getItem(sCaseTier1Appt) !== null) {
 
                 providerTierNotes = sessionStorage.getItem(sCaseTier1Appt);
-                
+
                 if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN"  ) {
                     sessionStorage.removeItem('QuestionRadioStatusAppt');
                     sessionStorage.removeItem('schedproviders');
                 }
             }
             else {
+                console.log('null');
                 var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
                 if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes")) {
 
@@ -299,7 +285,9 @@
                 sessionStorage.removeItem('QuestionRadioStatusAppt');
                 sessionStorage.removeItem('schedproviders');
             }
+          }
         }
+
         window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
     }
 
