@@ -43,7 +43,7 @@
     }
 
     function checkIfReset(){
-        if(sessionStorage.getItem(sCaseAppt) !=g= null && sessionStorage.getItem('QuestionRadioStatusAppt') === 'OPT_IN') {
+        if(sessionStorage.getItem(sCaseAppt) !== null && sessionStorage.getItem('QuestionRadioStatusAppt') === 'OPT_IN') {
             window.parent.sessionStorage.removeItem(sCaseAppt);
             window.parent.sessionStorage.removeItem('messageSuccess');
             reset = true;
