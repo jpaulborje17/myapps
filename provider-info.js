@@ -15,7 +15,7 @@
     }).contents()[0].id;
 
     var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-
+    
     function isAutodocMnrNotEmpty() {
         if(sessionStorage.getItem('optout') !== null) {
             sessionStorage.removeItem('optout');
@@ -251,24 +251,6 @@
     }
 
 
-    function getScaseTier1Prov() {
-        var scaseId = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-        
-        for (let i=0; i< sessionStorage.length; i++) {
-            let key = sessionStorage.key(i);
-        
-            console.log('keys ' + key);
-
-            if(key === scaseId) {
-               return true;
-            }
-            
-           }
-          return false;
-        } 
-        
-
-
     var EmailCheckRadioButtonContent = '<td class="dataValueWrite" style="height:38px;width:193px;">\
 	<div class="radioTable" >\
 	    <div>\
@@ -308,12 +290,9 @@
     var providerTierNotes = '';
     if (document.forms[0].elements["TaskSectionReference"].value == "Tier1CompletionDetails") {
 
-
-
-
-
         //TODO: ADD OPT_IN MESSAGE HERE..
-        var sCaseProvInfo = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+
+        var sCaseProv = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
 
         var configuration = false;
         var myObj = requestMetaDataMandR().plugins;
@@ -328,12 +307,10 @@
         });
 
         if(configuration){
-            if(sessionStorage.getItem(sCase) !== null) {
+            if(sessionStorage.getItem(sCaseProv) !== null) {
 
-                if(getScaseTier1Prov()) {
-                    providerTierNotes = sessionStorage.getItem(sCase);
-                }
-
+                providerTierNotes = sessionStorage.getItem(sCaseProv);
+                
                 if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN"  ) {
                     sessionStorage.removeItem('QuestionradioStatus');
                     sessionStorage.removeItem('schedprov');
