@@ -9,7 +9,6 @@
     var reset = false;
     var householdIdSched;
     householdIdSched = getAttributeValue("pyWorkPage", "MemberID");
-    sessionStorage.setItem("campaignName", "Schedule Appointment");
 
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function () {
@@ -36,6 +35,7 @@
     }
 
     if (pageUrl == "ScheduleAppointment") {
+        sessionStorage.setItem("campaignName", "Schedule Appointment");
         isAutodocMnrNotEmpty();
     }
 
