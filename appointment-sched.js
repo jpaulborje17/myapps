@@ -20,7 +20,24 @@
     var sCaseAppt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
 
 
-    function isAutodocMnrNotEmpty() {    
+    function getScaseTier1Appt() {
+        var scaseId = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+        
+        for (let i=0; i< sessionStorage.length; i++) {
+            let key = sessionStorage.key(i);
+        
+            console.log('keys appt ' + key);
+
+            if(key === scaseId) {
+               return true;
+            }
+            
+           }
+          return false;
+     } 
+        
+
+    function isAutodocMnrNotEmpty() {
         if(sessionStorage.getItem('optoutappt') !== null) {
             sessionStorage.removeItem('optoutappt');
         }
@@ -245,47 +262,46 @@
         var sCaseTier1Appt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
 
         //TODO: ADD OPT_IN MESSAGE HERE..s
-            var configuration = false;
-            var myObj = requestMetaDataMandRAppt().plugins;
-            Object.keys(myObj).forEach(function (key) {
-                console.log(myObj[key].pluginId); // the value of the current key.
-                if (myObj[key].pluginId === "10" && myObj[key].name === "Autodoc") {
-                    configuration = true;
-                    console.log('config is ON');
+        var configuration = false;
+        var myObj = requestMetaDataMandRAppt().plugins;
+        Object.keys(myObj).forEach(function (key) {
+            console.log(myObj[key].pluginId); // the value of the current key.
+            if (myObj[key].pluginId === "10" && myObj[key].name === "Autodoc") {
+                configuration = true;
+                console.log('config is ON');
+            }
+        });
+
+        if (configuration) {
+            if (sessionStorage.getItem(sCaseAppt) !== null) {
+
+                if(getScaseTier1Appt()) {
+                    providerTierNotes = sessionStorage.getItem(sCaseAppt);
                 }
-            });
 
-            if (configuration) {
-                if (sessionStorage.getItem(sCaseAppt) !== null) {
-
-                    if(sCaseTier1Appt === sCaseAppt) {
-                        console.log('equal');
-                        providerTierNotes = sessionStorage.getItem(sCaseAppt);
-                    }
-
-                    if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN"  ) {
-                        sessionStorage.removeItem('QuestionRadioStatusAppt');
-                        sessionStorage.removeItem('schedproviders');
-                    }
-                }
-                else {
-                    var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
-                    if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes")) {
-
-                        if(sessionStorage.getItem('optoutappt') !== null) {
-                            providerTierNotes = "***Appointment Schedule Email Message Opt-in: No, " + getCurrentDateTime() + "***\n" +
-                               "***Appointment Schedule SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
-                            sessionStorage.removeItem('QuestionRadioStatusAppt');
-                        }
-                    }
-                }
-            }  else {
-                if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN" || sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_OUT") {
+                if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN"  ) {
                     sessionStorage.removeItem('QuestionRadioStatusAppt');
                     sessionStorage.removeItem('schedproviders');
                 }
             }
-            window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
+            else {
+                var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
+                if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes")) {
+
+                    if(sessionStorage.getItem('optoutappt') !== null) {
+                        providerTierNotes = "***Appointment Schedule Email Message Opt-in: No, " + getCurrentDateTime() + "***\n" +
+                            "***Appointment Schedule SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
+                        sessionStorage.removeItem('QuestionRadioStatusAppt');
+                    }
+                }
+            }
+        }  else {
+            if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN" || sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_OUT") {
+                sessionStorage.removeItem('QuestionRadioStatusAppt');
+                sessionStorage.removeItem('schedproviders');
+            }
+        }
+        window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
     }
 
     var ezcommCore = {
