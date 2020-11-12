@@ -18,6 +18,7 @@
     }).contents()[0].id;
 
     var sCaseAppt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+    console.log('appointment page ' + sCaseAppt);
 
 
     function getScaseTier1Appt() {
@@ -26,12 +27,10 @@
         for (let i=0; i< sessionStorage.length; i++) {
             let key = sessionStorage.key(i);
         
-            console.log('keys appt ' + key);
-
             if(key === scaseId) {
                return true;
             }
-            
+                                   
            }
           return false;
      } 
@@ -44,7 +43,7 @@
     }
 
     function checkIfReset(){
-        if(sessionStorage.getItem(sCaseAppt) !== null && sessionStorage.getItem('QuestionRadioStatusAppt') === 'OPT_IN') {
+        if(sessionStorage.getItem(sCaseAppt) !=g= null && sessionStorage.getItem('QuestionRadioStatusAppt') === 'OPT_IN') {
             window.parent.sessionStorage.removeItem(sCaseAppt);
             window.parent.sessionStorage.removeItem('messageSuccess');
             reset = true;
@@ -261,6 +260,8 @@
 
         var sCaseTier1Appt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
 
+        console.log('title autodoc page ' + sCaseTier1Appt);
+
         //TODO: ADD OPT_IN MESSAGE HERE..s
         var configuration = false;
         var myObj = requestMetaDataMandRAppt().plugins;
@@ -273,12 +274,10 @@
         });
 
         if (configuration) {
-            if (sessionStorage.getItem(sCaseAppt) !== null) {
+            if (sessionStorage.getItem(sCaseTier1Appt) !== null) {
 
-                if(getScaseTier1Appt()) {
-                    providerTierNotes = sessionStorage.getItem(sCaseAppt);
-                }
-
+                providerTierNotes = sessionStorage.getItem(sCaseTier1Appt);
+                
                 if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN"  ) {
                     sessionStorage.removeItem('QuestionRadioStatusAppt');
                     sessionStorage.removeItem('schedproviders');
