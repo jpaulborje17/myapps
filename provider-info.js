@@ -31,9 +31,9 @@
     }
 
     if(document.forms[0].elements["TaskSectionReference"].value == "AssignPCP"){
-        isAutodocMnrNotEmpty();
         sessionStorage.setItem("campaignName", "Search and Assign Provider");
-        sessionStorage.setItem('providerInfoScase', sCase);
+        sessionStorage.setItem('provInfoScase', sCase);
+        isAutodocMnrNotEmpty();
     }
 
     function launchWinMnR() {
@@ -308,24 +308,25 @@
 
         });
 
+        if(sessionStorage.getItem("campaignName") === "Search and Assign Provider") {
+            if(configuration){
+                if(sessionStorage.getItem(sCaseProv) !== null) {
 
-  if(sessionStorage.getItem("campaignName") === "Search and Assign Provider") {
-        if(configuration){
-            if(sessionStorage.getItem(sCaseProv) !== null) {
+                    providerTierNotes = sessionStorage.getItem(sCaseProv);
 
-                providerTierNotes = sessionStorage.getItem(sCaseProv);
+                    if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN"  ) {
+                        sessionStorage.removeItem('QuestionradioStatus');
+                        sessionStorage.removeItem('schedprov');
+                    }
 
-                if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN"  ) {
-                    sessionStorage.removeItem('QuestionradioStatus');
-                    sessionStorage.removeItem('schedprov');
-                }
+                    if (sessionStorage.getItem('messageSuccess') !== null) {
+                        sessionStorage.removeItem('messageSuccess');
+                    }
 
-                if (sessionStorage.getItem('messageSuccess') !== null) {
-                    sessionStorage.removeItem('messageSuccess');
-                }
-
-            } else {               
-                if(sessionStorage.getItem('providerInfoScase') === sCaseProv) {
+                } else {
+                    console.log(sCaseProv);
+                    console.log(sessionStorage.getItem('provInfoScase'));
+                    if(sessionStorage.getItem('provInfoScase') === sCaseProv) {
                     var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
                     if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes") ) {
                         if(sessionStorage.getItem('optout') !== null) {
@@ -333,20 +334,20 @@
                                 + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
                             sessionStorage.removeItem('QuestionradioStatus');
                         }
+                      } 
                     }
                 }
+            } else {
+                if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN" || sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
+                    sessionStorage.removeItem('QuestionradioStatus');
+                    sessionStorage.removeItem('schedprov');
+                }
             }
-
-        } else {
-            if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN" || sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
-                sessionStorage.removeItem('QuestionradioStatus');
-                sessionStorage.removeItem('schedprov');
-            }
+            window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
         }
-    }   
 
 
-        window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
+
     }
 
     $(document).on('DOMSubtreeModified', '#pyFlowActionHTML div ', function() {
