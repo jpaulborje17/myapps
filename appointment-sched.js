@@ -36,6 +36,7 @@
 
     if (pageUrl == "ScheduleAppointment") {
         sessionStorage.setItem("campaignName", "Schedule Appointment");
+        sessionStorage.setItem("schedApptScase", sCaseAppt);
         isAutodocMnrNotEmpty();
     }
 
@@ -257,7 +258,6 @@
         });
 
         if(sessionStorage.getItem("campaignName") === "Schedule Appointment") {
-          console.log('campaignname');
           if (configuration) {
             if (sessionStorage.getItem(sCaseTier1Appt) !== null) {
 
@@ -269,7 +269,9 @@
                 }
             }
             else {
-                console.log('null');
+            console.log(sCaseTier1Appt);
+            console.log(sessionStorage.getItem('schedApptScase'));
+             if(sessionStorage.getItem("schedApptScase") === sCaseTier1Appt) {
                 var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
                 if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes")) {
 
@@ -279,6 +281,7 @@
                         sessionStorage.removeItem('QuestionRadioStatusAppt');
                     }
                 }
+              } 
             }
         }  else {
             if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN" || sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_OUT") {
@@ -286,9 +289,8 @@
                 sessionStorage.removeItem('schedproviders');
             }
           }
+            window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
         }
-
-        window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
     }
 
     var ezcommCore = {
