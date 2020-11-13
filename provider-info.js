@@ -15,7 +15,6 @@
     }).contents()[0].id;
 
     var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-    sessionStorage.setItem('providerInfoScase', sCase);
 
     function isAutodocMnrNotEmpty() {
         if(sessionStorage.getItem('optout') !== null) {
