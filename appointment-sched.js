@@ -381,10 +381,8 @@
                 }
             }
             else {
-                if (sessionStorage.getItem(sCaseAppt) === null) {
-                    window.parent.sessionStorage.setItem('optoutappt', 'optoutautodoc')
-                    window.parent.sessionStorage.setItem("QuestionRadioStatusAppt", "OPT_OUT");
-                }
+                window.parent.sessionStorage.setItem('optoutappt', 'optoutautodoc');
+                window.parent.sessionStorage.setItem("QuestionRadioStatusAppt", "OPT_OUT");
             }
         }
     });
