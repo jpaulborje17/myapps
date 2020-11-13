@@ -6,7 +6,6 @@
     var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
     var ezcommCommunications;
     var householdId = getAttributeValue("pyWorkPage", "MemberID");
-    sessionStorage.setItem("campaignName", "Search and Assign Provider");
 
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function() {
@@ -34,6 +33,7 @@
 
     if(document.forms[0].elements["TaskSectionReference"].value == "AssignPCP"){
         isAutodocMnrNotEmpty();
+        sessionStorage.setItem("campaignName", "Search and Assign Provider");
     }
 
     function launchWinMnR() {
@@ -336,7 +336,7 @@
                     }
                 }
             }
-            
+
         } else {
             if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN" || sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
                 sessionStorage.removeItem('QuestionradioStatus');
