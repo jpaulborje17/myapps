@@ -6,6 +6,7 @@
     var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
     var ezcommCommunications;
     var householdId = getAttributeValue("pyWorkPage", "MemberID");
+    sessionStorage.setItem("campaignName", "Search and Assign Provider");
 
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function() {
@@ -15,14 +16,7 @@
     }).contents()[0].id;
 
     var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-
-    var splitscase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim().split(" ");
-
-    splitscase.pop();
-    splitscase = splitscase.join(" ");
-
-    sessionStorage.setItem("campaignName", splitscase);
-
+    sessionStorage.setItem('providerInfoScase', sCase);
 
     function isAutodocMnrNotEmpty() {
         if(sessionStorage.getItem('optout') !== null) {
@@ -314,6 +308,8 @@
 
         });
 
+
+  if(sessionStorage.getItem("campaignName") === "Search and Assign Provider") {
         if(configuration){
             if(sessionStorage.getItem(sCaseProv) !== null) {
 
@@ -328,23 +324,26 @@
                     sessionStorage.removeItem('messageSuccess');
                 }
 
-            } else {
-              //  var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
-              //  if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes") ) {
-                    if(sessionStorage.getItem('optout') !== null) {
-                        providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
-                            + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
-                        sessionStorage.removeItem('QuestionradioStatus');
-                        sessionStorage.removeItem('optout');
+            } else {               
+                if(sessionStorage.getItem('providerInfoScase') === sCaseProv) {
+                    var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
+                    if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes") ) {
+                        if(sessionStorage.getItem('optout') !== null) {
+                            providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
+                                + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
+                            sessionStorage.removeItem('QuestionradioStatus');
+                        }
                     }
-               // }
+                }
             }
+            
         } else {
             if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN" || sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
                 sessionStorage.removeItem('QuestionradioStatus');
                 sessionStorage.removeItem('schedprov');
             }
-        } //
+        }
+    }   
 
 
         window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
