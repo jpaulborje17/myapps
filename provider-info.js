@@ -33,6 +33,7 @@
     if(document.forms[0].elements["TaskSectionReference"].value == "AssignPCP"){
         isAutodocMnrNotEmpty();
         sessionStorage.setItem("campaignName", "Search and Assign Provider");
+        sessionStorage.setItem('providerInfoScase', sCase);
     }
 
     function launchWinMnR() {
