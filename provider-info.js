@@ -9,8 +9,6 @@
 
     var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1];
 
-    console.log("interaction" + interaction);
-
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function() {
             return this.id.match(/\d$/);
@@ -19,6 +17,10 @@
     }).contents()[0].id;
 
     var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+
+    var scaseinteraction = interaction + " "  + scase;
+
+    console.log('scaseinter ' + scaseinteraction);
 
     function isAutodocMnrNotEmpty() {
         if(sessionStorage.getItem('optout') !== null) {
