@@ -377,10 +377,11 @@
     function messageEvent(msg) {
         if(msg.data) {
             var additionalAutoDoc = sessionStorage.getItem('schedprov') + "\n";
-            console.log(scaseinteraction);
+            console.log('SDFSDFSDFSD' + scaseinteraction);
             sessionStorage.setItem('messageSuccess', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "").replace(additionalAutoDoc, "");
             var isNull = false;
+
             if(window.parent.sessionStorage.getItem(scaseinteraction) === null) {
                 window.parent.sessionStorage.setItem(scaseinteraction, data + additionalAutoDoc);
                 isNull = true;
