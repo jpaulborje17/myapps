@@ -286,7 +286,7 @@
     if (document.forms[0].elements["TaskSectionReference"].value == "Tier1CompletionDetails") {
 
         var sCaseProv = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-        var interactiontier1 =  window.parent.$("label:contains('Interaction ID:')").text().split(":")[1];
+        var interactiontier1 =  window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
         var scasetier1inteaction = interactiontier1 + " " + sCaseProv; 
 
         var configuration = false;
