@@ -6,8 +6,7 @@
     var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
     var ezcommCommunications;
     var householdId = getAttributeValue("pyWorkPage", "MemberID");
-
-    var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1];
+    var scaseinteraction;
 
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function() {
@@ -16,36 +15,25 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
 
-    var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-
-    var scaseinteraction = interaction + " " + sCase;
-
-    console.log('scaseinter ' + scaseinteraction);
-
-    function isAutodocMnrNotEmpty() {
+    /* function isAutodocMnrNotEmpty() {
         if(sessionStorage.getItem('optout') !== null) {
             sessionStorage.removeItem('optout');
         }
-    }
-
-    function checkIfReset(){
-
-        if(sessionStorage.getItem(sCase) !== null && sessionStorage.getItem('QuestionradioStatus') === 'OPT_IN') {
-            window.parent.sessionStorage.removeItem(sCase);
-            window.parent.sessionStorage.removeItem('messageSuccess');
-        }
-    }
+    } */
 
     if(document.forms[0].elements["TaskSectionReference"].value == "AssignPCP"){
+        var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+        var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1];
+        scaseinteraction = interaction + " " + sCase;
+        console.log('scaseinter ' + scaseinteraction);
         sessionStorage.setItem("campaignName", "Search and Assign Provider");
-        sessionStorage.setItem('provInfoScase', sCase);
-        isAutodocMnrNotEmpty();
+        sessionStorage.setItem('provInfoScase', scaseinteraction);
+        //isAutodocMnrNotEmpty();
     }
 
     function launchWinMnR() {
         var appWindow = window.parent.open("/a4me/ezcomm-core-v2/", "a4meEZCommWindow", 'location=no,height=600,width=1000,scrollbars=1');
-        isAutodocMnrNotEmpty();
-        checkIfReset();
+        //isAutodocMnrNotEmpty();
         var msgprov = messagesMandR()[0].msg_parameters.providers;
         var detail = '';
 
@@ -298,9 +286,9 @@
     var providerTierNotes = '';
     if (document.forms[0].elements["TaskSectionReference"].value == "Tier1CompletionDetails") {
 
-        //TODO: ADD OPT_IN MESSAGE HERE..
-
         var sCaseProv = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+        var interactiontier1 =  window.parent.$("label:contains('Interaction ID:')").text().split(":")[1];
+        var scasetier1inteaction = interactiontier1 + " " + sCaseProv; 
 
         var configuration = false;
         var myObj = requestMetaDataMandR().plugins;
@@ -316,9 +304,10 @@
 
         if(sessionStorage.getItem("campaignName") === "Search and Assign Provider") {
             if(configuration){
-                if(sessionStorage.getItem(sCaseProv) !== null) {
+               if(sessionStorage.getItem('provInfoScase') === scasetier1inteaction) {
+                if(sessionStorage.getItem(scasetier1inteaction) !== null) {
 
-                    providerTierNotes = sessionStorage.getItem(sCaseProv);
+                    providerTierNotes = sessionStorage.getItem(scasetier1inteaction);
 
                     if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN"  ) {
                         sessionStorage.removeItem('QuestionradioStatus');
@@ -330,17 +319,16 @@
                     }
 
                 } else {
-                    if(sessionStorage.getItem('provInfoScase') === sCaseProv) {
                         var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
                         if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes") ) {
-                            if(sessionStorage.getItem('optout') !== null) {
+                            if(sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
                                 providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
                                     + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
                                 sessionStorage.removeItem('QuestionradioStatus');
                             }
                         }
                     }
-                }
+                } //
             } else {
                 if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN" || sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
                     sessionStorage.removeItem('QuestionradioStatus');
@@ -393,12 +381,12 @@
             sessionStorage.setItem('messageSuccess', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "").replace(additionalAutoDoc, "");
             var isNull = false;
-            if(window.parent.sessionStorage.getItem(sCase) === null) {
-                window.parent.sessionStorage.setItem(sCase, data + additionalAutoDoc);
+            if(window.parent.sessionStorage.getItem(scaseinteraction) === null) {
+                window.parent.sessionStorage.setItem(scaseinteraction, data + additionalAutoDoc);
                 isNull = true;
             }
             else {
-                appendToStorage(sCase, data, additionalAutoDoc);
+                appendToStorage(scaseinteraction, data, additionalAutoDoc);
 
             }
             return false;
@@ -452,8 +440,7 @@
             }
 
         } else {
-            if(sessionStorage.getItem(sCase) === null) {
-                window.parent.sessionStorage.setItem('optout', 'optoutautodoc');
+            if(sessionStorage.getItem(scaseinteraction) === null) {
                 window.parent.sessionStorage.setItem("QuestionradioStatus", "OPT_OUT");
             }
         }
