@@ -23,12 +23,11 @@
 
     if(document.forms[0].elements["TaskSectionReference"].value == "AssignPCP"){
         var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-        var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1];
+        var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
         scaseinteraction = interaction + " " + sCase;
         console.log('scaseinter ' + scaseinteraction);
         sessionStorage.setItem("campaignName", "Search and Assign Provider");
         sessionStorage.setItem('provInfoScase', scaseinteraction);
-        //isAutodocMnrNotEmpty();
     }
 
     function launchWinMnR() {
