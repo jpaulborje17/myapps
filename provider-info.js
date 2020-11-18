@@ -306,7 +306,7 @@
         if(sessionStorage.getItem("campaignName") === "Search and Assign Provider") {
             if(configuration){
                if(sessionStorage.getItem('provInfoScase') === scasetier1interaction) {
-                if(sessionStorage.getItem(scasetier1inteaction) !== null) {
+                if(sessionStorage.getItem(scasetier1interaction) !== null) {
 
                     providerTierNotes = sessionStorage.getItem(scasetier1interaction);
 
