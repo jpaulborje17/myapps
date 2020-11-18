@@ -18,7 +18,7 @@
 
     var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
 
-    var scaseinteraction = interaction + " " + scase;
+    var scaseinteraction = interaction + " " + sCase;
 
     console.log('scaseinter ' + scaseinteraction);
 
