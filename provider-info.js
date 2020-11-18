@@ -27,7 +27,7 @@
         scaseinteraction = interaction + " " + sCase;
         console.log('scaseinter ' + scaseinteraction);
         sessionStorage.setItem("campaignName", "Search and Assign Provider");
-        sessionStorage.setItem('provInfoScase', scaseinteraction);
+        sessionStorage.setItem("provInfoScase", scaseinteraction);
     }
 
     function launchWinMnR() {
@@ -377,6 +377,7 @@
     function messageEvent(msg) {
         if(msg.data) {
             var additionalAutoDoc = sessionStorage.getItem('schedprov') + "\n";
+            console.log(scaseinteraction);
             sessionStorage.setItem('messageSuccess', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "").replace(additionalAutoDoc, "");
             var isNull = false;
