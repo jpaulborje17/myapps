@@ -287,7 +287,9 @@
 
         var sCaseProv = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
         var interactiontier1 =  window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
-        var scasetier1inteaction = interactiontier1 + " " + sCaseProv; 
+        var scasetier1interaction = interactiontier1 + " " + sCaseProv; 
+
+        console.log('w ' + scasetier1interaction);
 
         var configuration = false;
         var myObj = requestMetaDataMandR().plugins;
@@ -303,10 +305,10 @@
 
         if(sessionStorage.getItem("campaignName") === "Search and Assign Provider") {
             if(configuration){
-               if(sessionStorage.getItem('provInfoScase') === scasetier1inteaction) {
+               if(sessionStorage.getItem('provInfoScase') === scasetier1interaction) {
                 if(sessionStorage.getItem(scasetier1inteaction) !== null) {
 
-                    providerTierNotes = sessionStorage.getItem(scasetier1inteaction);
+                    providerTierNotes = sessionStorage.getItem(scasetier1interaction);
 
                     if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN"  ) {
                         sessionStorage.removeItem('QuestionradioStatus');
