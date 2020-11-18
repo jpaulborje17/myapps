@@ -7,6 +7,10 @@
     var ezcommCommunications;
     var householdId = getAttributeValue("pyWorkPage", "MemberID");
 
+    var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1];
+
+    console.log("interaction" + interaction);
+
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function() {
             return this.id.match(/\d$/);
@@ -324,17 +328,15 @@
                     }
 
                 } else {
-                    console.log(sCaseProv);
-                    console.log(sessionStorage.getItem('provInfoScase'));
                     if(sessionStorage.getItem('provInfoScase') === sCaseProv) {
-                    var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
-                    if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes") ) {
-                        if(sessionStorage.getItem('optout') !== null) {
-                            providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
-                                + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
-                            sessionStorage.removeItem('QuestionradioStatus');
+                        var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
+                        if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes") ) {
+                            if(sessionStorage.getItem('optout') !== null) {
+                                providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
+                                    + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
+                                sessionStorage.removeItem('QuestionradioStatus');
+                            }
                         }
-                      } 
                     }
                 }
             } else {
@@ -386,7 +388,6 @@
     function messageEvent(msg) {
         if(msg.data) {
             var additionalAutoDoc = sessionStorage.getItem('schedprov') + "\n";
-            console.log('msg');
             sessionStorage.setItem('messageSuccess', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "").replace(additionalAutoDoc, "");
             var isNull = false;
