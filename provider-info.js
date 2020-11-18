@@ -15,12 +15,6 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
 
-    /* function isAutodocMnrNotEmpty() {
-        if(sessionStorage.getItem('optout') !== null) {
-            sessionStorage.removeItem('optout');
-        }
-    } */
-
     if(document.forms[0].elements["TaskSectionReference"].value == "AssignPCP"){
         var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
         var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
@@ -32,7 +26,6 @@
 
     function launchWinMnR() {
         var appWindow = window.parent.open("/a4me/ezcomm-core-v2/", "a4meEZCommWindow", 'location=no,height=600,width=1000,scrollbars=1');
-        //isAutodocMnrNotEmpty();
         var msgprov = messagesMandR()[0].msg_parameters.providers;
         var detail = '';
 
@@ -320,14 +313,11 @@
                     }
 
                 } else {
-                        var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
-                        if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes") ) {
-                            if(sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
-                                providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
-                                    + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
-                                sessionStorage.removeItem('QuestionradioStatus');
-                            }
-                        }
+                    if(sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
+                        providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
+                                 + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
+                             sessionStorage.removeItem('QuestionradioStatus');
+                        } 
                     }
                 } //
             } else {
