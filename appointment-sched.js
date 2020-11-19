@@ -3,12 +3,10 @@
     'use strict';
     // Get member sessionStorage from maestro
     var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
-    var houseHoldNum;
     var ezcommCommunications;
     var pageUrl = document.forms[0].elements["TaskSectionReference"].value;
-    var reset = false;
-    var householdIdSched;
-    householdIdSched = getAttributeValue("pyWorkPage", "MemberID");
+    var householdIdSched = getAttributeValue("pyWorkPage", "MemberID");
+    var scaseinteraction;
 
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function () {
@@ -17,33 +15,17 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
 
-    var sCaseAppt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
 
-
-    function isAutodocMnrNotEmpty() {
-        if(sessionStorage.getItem('optoutappt') !== null) {
-            sessionStorage.removeItem('optoutappt');
-        }
+    if(document.forms[0].elements["TaskSectionReference"].value == "ScheduleAppointment"){
+        var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+        var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
+        scaseinteraction = interaction + " " + sCase;
+        sessionStorage.setItem("schedApptScase", scaseinteraction);
     }
 
-    function checkIfReset(){
-        if(sessionStorage.getItem(sCaseAppt) !== null && sessionStorage.getItem('QuestionRadioStatusAppt') === 'OPT_IN') {
-            window.parent.sessionStorage.removeItem(sCaseAppt);
-            window.parent.sessionStorage.removeItem('messageSuccess');
-            reset = true;
-        }
-    }
-
-    if (pageUrl == "ScheduleAppointment") {
-        sessionStorage.setItem("campaignName", "Schedule Appointment");
-        sessionStorage.setItem("schedApptScase", sCaseAppt);
-        isAutodocMnrNotEmpty();
-    }
 
     function launchWinMnR() {
         var appWindow = window.parent.open("/a4me/ezcomm-core-v2/", "a4meEZCommWindow", 'location=no,height=600,width=1000,scrollbars=1');
-        isAutodocMnrNotEmpty();
-        checkIfReset();
         var detail = '';
 
 
@@ -62,7 +44,6 @@
                 if (sessionStorage.getItem('messageSuccess') === null && configappt) {
                     window.parent.sessionStorage.removeItem("QuestionRadioStatusAppt");
                     document.getElementById('ezcomm-mnr-mail-question-yes').checked = false;
-                    window.parent.sessionStorage.removeItem("autodocmnrappt");
                 }
 
                 clearInterval(loop);
@@ -244,7 +225,12 @@
     var providerTierNotes = '';
     if (document.forms[0].elements["TaskSectionReference"].value == "Tier1CompletionDetails") {
 
-        var sCaseTier1Appt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+
+        var sCaseAppt = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+        var interactiontier1 =  window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
+        var sCaseTier1Appt = interactiontier1 + " " + sCaseAppt;
+
+
 
         //TODO: ADD OPT_IN MESSAGE HERE..s
         var configuration = false;
@@ -257,40 +243,35 @@
             }
         });
 
-        if(sessionStorage.getItem("campaignName") === "Schedule Appointment") {
-          if (configuration) {
-            if (sessionStorage.getItem(sCaseTier1Appt) !== null) {
+        if (configuration) {
+            if(sessionStorage.getItem("schedApptScase") === sCaseTier1Appt) {
+                if (sessionStorage.getItem(sCaseTier1Appt) !== null) {
 
-                providerTierNotes = sessionStorage.getItem(sCaseTier1Appt);
+                    providerTierNotes = sessionStorage.getItem(sCaseTier1Appt);
 
-                if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN"  ) {
-                    sessionStorage.removeItem('QuestionRadioStatusAppt');
-                    sessionStorage.removeItem('schedproviders');
-                }
-            }
-            else {
-            console.log(sCaseTier1Appt);
-            console.log(sessionStorage.getItem('schedApptScase'));
-             if(sessionStorage.getItem("schedApptScase") === sCaseTier1Appt) {
-                var tier1Comments = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val();
-                if (tier1Comments === undefined || tier1Comments === '' || !tier1Comments.contains("Opt-in: Yes")) {
+                    if (sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN") {
+                        sessionStorage.removeItem('QuestionRadioStatusAppt');
+                        sessionStorage.removeItem('schedproviders');
+                    }
 
-                    if(sessionStorage.getItem('optoutappt') !== null) {
+                    if (sessionStorage.getItem('messageSuccess') !== null) {
+                        sessionStorage.removeItem('messageSuccess');
+                    }
+                } else {
+                    if (sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_OUT") {
                         providerTierNotes = "***Appointment Schedule Email Message Opt-in: No, " + getCurrentDateTime() + "***\n" +
                             "***Appointment Schedule SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
                         sessionStorage.removeItem('QuestionRadioStatusAppt');
                     }
                 }
-              } 
             }
         }  else {
             if(sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_IN" || sessionStorage.getItem('QuestionRadioStatusAppt') === "OPT_OUT") {
                 sessionStorage.removeItem('QuestionRadioStatusAppt');
                 sessionStorage.removeItem('schedproviders');
             }
-          }
-            window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
         }
+        window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
     }
 
     var ezcommCore = {
@@ -321,12 +302,12 @@
             sessionStorage.setItem('messageSuccess', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "").replace(additionalAutoDoc, "");
             var isNull = false;
-            if(window.parent.sessionStorage.getItem(sCaseAppt) === null) {
-                window.parent.sessionStorage.setItem(sCaseAppt, data + additionalAutoDoc);
+            if(window.parent.sessionStorage.getItem(scaseinteraction) === null) {
+                window.parent.sessionStorage.setItem(scaseinteraction, data + additionalAutoDoc);
                 isNull = true;
             }
             else {
-                appendToStorage(sCaseAppt, data, additionalAutoDoc);
+                appendToStorage(scaseinteraction, data, additionalAutoDoc);
 
             }
             return false;
@@ -381,8 +362,9 @@
                 }
             }
             else {
-                window.parent.sessionStorage.setItem('optoutappt', 'optoutautodoc');
-                window.parent.sessionStorage.setItem("QuestionRadioStatusAppt", "OPT_OUT");
+                if (sessionStorage.getItem(scaseinteraction) === null) {
+                    window.parent.sessionStorage.setItem("QuestionRadioStatusAppt", "OPT_OUT");
+                }
             }
         }
     });

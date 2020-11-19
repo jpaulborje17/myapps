@@ -16,11 +16,10 @@
     }).contents()[0].id;
 
     if(document.forms[0].elements["TaskSectionReference"].value == "AssignPCP"){
+        sessionStorage.setItem("campaignName", "Search and Assign Provider");
         var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
         var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
         scaseinteraction = interaction + " " + sCase;
-        console.log('scaseinter ' + scaseinteraction);
-        sessionStorage.setItem("campaignName", "Search and Assign Provider");
         sessionStorage.setItem("provInfoScase", scaseinteraction);
     }
 
@@ -280,9 +279,7 @@
 
         var sCaseProv = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
         var interactiontier1 =  window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
-        var scasetier1interaction = interactiontier1 + " " + sCaseProv; 
-
-        console.log('w ' + scasetier1interaction);
+        var scasetier1interaction = interactiontier1 + " " + sCaseProv;
 
         var configuration = false;
         var myObj = requestMetaDataMandR().plugins;
@@ -296,38 +293,41 @@
 
         });
 
-        if(sessionStorage.getItem("campaignName") === "Search and Assign Provider") {
-            if(configuration){
-               if(sessionStorage.getItem('provInfoScase') === scasetier1interaction) {
-                if(sessionStorage.getItem(scasetier1interaction) !== null) {
+        if(configuration){
+            if(sessionStorage.getItem("campaignName") === "Search and Assign Provider") {
+                if (sessionStorage.getItem('provInfoScase') === scasetier1interaction) {
+                    if (sessionStorage.getItem(scasetier1interaction) !== null) {
 
-                    providerTierNotes = sessionStorage.getItem(scasetier1interaction);
+                        providerTierNotes = sessionStorage.getItem(scasetier1interaction);
 
-                    if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN"  ) {
-                        sessionStorage.removeItem('QuestionradioStatus');
-                        sessionStorage.removeItem('schedprov');
+                        if (sessionStorage.getItem('QuestionradioStatus') === "OPT_IN") {
+                            sessionStorage.removeItem('QuestionradioStatus');
+                            sessionStorage.removeItem('schedprov');
+                        }
+
+                        if (sessionStorage.getItem('messageSuccess') !== null) {
+                            sessionStorage.removeItem('messageSuccess');
+                        }
+
+                    } else {
+                        if (sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
+                            providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
+                                + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
+                            sessionStorage.removeItem('QuestionradioStatus');
+                        }
                     }
-
-                    if (sessionStorage.getItem('messageSuccess') !== null) {
-                        sessionStorage.removeItem('messageSuccess');
-                    }
-
-                } else {
-                    if(sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
-                        providerTierNotes = "***Provider Information Email Message Opt-in: No, " + getCurrentDateTime() + "***\n"
-                                 + "***Provider Information SMS Message Opt-in: No, " + getCurrentDateTime() + "***\n";
-                             sessionStorage.removeItem('QuestionradioStatus');
-                        } 
-                    }
+                    window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
+                    sessionStorage.removeItem('provInfoScase');
+                    sessionStorage.removeItem(scasetier1interaction);
                 } //
-            } else {
-                if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN" || sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
-                    sessionStorage.removeItem('QuestionradioStatus');
-                    sessionStorage.removeItem('schedprov');
-                }
+              }     
+        } else {
+            if(sessionStorage.getItem('QuestionradioStatus') === "OPT_IN" || sessionStorage.getItem('QuestionradioStatus') === "OPT_OUT") {
+                sessionStorage.removeItem('QuestionradioStatus');
+                sessionStorage.removeItem('schedprov');
             }
-            window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('#Comments').val(providerTierNotes);
-        }
+        } 
+
 
 
 
@@ -369,7 +369,6 @@
     function messageEvent(msg) {
         if(msg.data) {
             var additionalAutoDoc = sessionStorage.getItem('schedprov') + "\n";
-            console.log('SDFSDFSDFSD' + scaseinteraction);
             sessionStorage.setItem('messageSuccess', 'success');
             var data = msg.data.replace("Preference ", "").replace("Override ", "").replace(additionalAutoDoc, "");
             var isNull = false;
