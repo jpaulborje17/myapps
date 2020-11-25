@@ -2,6 +2,7 @@
 
     'use strict';
     // Get member sessionStorage from maestro
+    alert("dfdfdfdfdfdfdf");
     var pageUrl;
     if (document.forms[0].elements["TaskSectionReference"] !== undefined) {
         pageUrl = document.forms[0].elements["TaskSectionReference"].value;
@@ -294,13 +295,9 @@
     function addEzcommCoreLauncherGPPPayment() {
         if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("label:contains('Make a Payment')").length > 0 &&
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#gpppaymentheader").length === 0) {
-            $('#RULE_KEY > div:nth-child(1) > div > div > div > div > p:nth-child(1)').append('<button style="margin-bottom:10px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 11px;background:url(/a4me/ezcomm-launcher-maestro-gpp-payment-header/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openGPP()" type="button" id="gpppaymentheader"></button>');
+            $('#pyWorkPageHasEmployerGroupPlanNo').closest('.layout-none').prepend('<button style="margin-bottom:11px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: -33px;background:url(/a4me/ezcomm-launcher-maestro-gpp-payment-header/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openGPP()" type="button" id="gpppaymentheader"></button>');
         }
     }
-
-    // $('#pyWorkPageHasEmployerGroupPlanNo').closest('.layout-none').prepend('<h1>asffdsfsdf</h1>');
-    
-
 
     // EFT Payment header start
     var ezcommButtonEftVar = setInterval(addEzcommCoreLauncherGPPPaymentEft, 1500);
