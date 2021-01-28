@@ -1,1 +1,1 @@
-alert('testing only');
+console.log('testing only');
