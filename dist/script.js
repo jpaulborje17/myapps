@@ -1,1 +1,1 @@
-alert('testing onlys');
+alert('testing only');
