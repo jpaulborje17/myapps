@@ -37,7 +37,7 @@
             }
         });
         return configuration;
-    }();
+    };
 
     function getMemberDataMandR() {
         var ezcommMandRMemObj = {};
@@ -112,7 +112,7 @@
         var interactiontier1 =  window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
         var scasetier1interaction = interactiontier1 + " " + sCase;
 
-        if(isAutodocEnabled){
+        if(isAutodocEnabled()){
             if(sessionStorage.getItem("campaignName") === "Review Rx Benefits"
                 && sessionStorage.getItem('revRxBenScase') === scasetier1interaction) {
                 if (sessionStorage.getItem(scasetier1interaction) !== null) {
