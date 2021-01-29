@@ -16,7 +16,7 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
 
-  if(document.forms[0].elements["TaskSectionReference"].value !== undefined) {  
+  if(document.forms[0].elements["TaskSectionReference"] !== undefined) {  
     if (document.forms[0].elements["TaskSectionReference"].value == "UHG-MedRet-IIM-Work-ReviewRxBenefits" || 
     document.forms[0].elements["TaskSectionReference"].value == "EnterRequestDetails")
     {
