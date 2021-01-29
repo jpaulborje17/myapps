@@ -16,7 +16,9 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
 
-    if (document.forms[0].elements["TaskSectionReference"].value == "UHG-MedRet-IIM-Work-ReviewRxBenefits"){
+    if (document.forms[0].elements["TaskSectionReference"].value == "UHG-MedRet-IIM-Work-ReviewRxBenefits" || 
+    document.forms[0].elements["TaskSectionReference"].value == "EnterRequestDetails")
+    {
         var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
         var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
         scaseinteraction = interaction + " " + sCase;
