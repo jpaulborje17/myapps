@@ -9,6 +9,13 @@
     var scaseinteraction;
     var householdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
 
+    var pageUrl;
+    if (document.forms[0].elements["TaskSectionReference"] !== undefined) {
+        pageUrl = document.forms[0].elements["TaskSectionReference"].value;
+    } else {
+        pageUrl = sessionStorage.getItem('pageUrl');
+    }    
+
     var activeTier1IframeId = window.parent.$('div[id^="PegaWebGadget"]').filter(
         function() {
             return this.id.match(/\d$/);
@@ -16,16 +23,14 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
 
-  if(document.forms[0].elements["TaskSectionReference"] !== undefined) {  
-    if (document.forms[0].elements["TaskSectionReference"].value == "UHG-MedRet-IIM-Work-ReviewRxBenefits" || 
-    document.forms[0].elements["TaskSectionReference"].value == "EnterRequestDetails")
+    if (pageUrl == "UHG-MedRet-IIM-Work-ReviewRxBenefits" || 
+        pageUrl == "EnterRequestDetails")
     {
         var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
         var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
         scaseinteraction = interaction + " " + sCase;
         sessionStorage.setItem("revRxBenScase", scaseinteraction);
         sessionStorage.setItem("campaignName", "Review Rx Benefits");
-    }
   } 
 
     var isAutodocEnabled = function() {
@@ -197,6 +202,9 @@
 
     var ezcommButtonVar = setInterval(addEzcommCoreLauncher, 1500);
     function addEzcommCoreLauncher() {
+  
+        console.log(pageUrl);
+
         if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButton").length === 0) {
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().append(
                 '<button id="ezcommLauncherButton" onclick="window.parent.openEzcomm()" type="button" class="pzhc"  ><div class="pzbtn-rnd" ><div class="pzbtn-lft"><div class="pzbtn-rgt" ><div class="pzbtn-mid" ><img src="webwb/zblankimage.gif" alt="" class="pzbtn-i" onclick="window.parent.openEzcomm()">EZComm</div></div></div></div></button>');
