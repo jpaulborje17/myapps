@@ -16,6 +16,7 @@
         return $(this).attr('aria-hidden') === "false";
     }).contents()[0].id;
 
+  if(document.forms[0].elements["TaskSectionReference"].value !== undefined) {  
     if (document.forms[0].elements["TaskSectionReference"].value == "UHG-MedRet-IIM-Work-ReviewRxBenefits" || 
     document.forms[0].elements["TaskSectionReference"].value == "EnterRequestDetails")
     {
@@ -25,6 +26,7 @@
         sessionStorage.setItem("revRxBenScase", scaseinteraction);
         sessionStorage.setItem("campaignName", "Review Rx Benefits");
     }
+  } 
 
     var isAutodocEnabled = function() {
         var configuration = false;
