@@ -2,7 +2,7 @@
 (function($, window, document, undefined) {
 
     'use strict';
-    console.log('check review rx');
+    console.log('check review rx intent');
     // Get member sessionStorage from maestro
     var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
     var ezcommCommunications;
