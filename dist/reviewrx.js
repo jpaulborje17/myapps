@@ -264,6 +264,10 @@
     }
 
 
+
+    
+
+
     $(document).on('DOMSubtreeModified', '#pyFlowActionHTML > div', function() {
         console.log('id household ' + householdIdReviewss);
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
