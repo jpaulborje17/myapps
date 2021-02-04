@@ -160,15 +160,25 @@
             var data = msg.data.replace("Preference ", "").replace("Override ", "");
             var isNull = false;
             if(window.parent.sessionStorage.getItem(scaseinteraction) === null) {
+
+                var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+                var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
+                var scaseinteractions = interaction + " " + sCase;
+                console.log("null " + scaseinteractions);
+
+
                 window.parent.sessionStorage.setItem(scaseinteraction, data);
+
+
                 isNull = true;
             } else {
                 
 
                 var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
                 var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
-                var scaseinteractions = interaction + " " + sCase;
-                console.log(scaseinteractions);
+                var scaseinteractionss = interaction + " " + sCase;
+                console.log("append " + scaseinteractionss);
+
 
                     appendToStorage(scaseinteraction, data);
             
