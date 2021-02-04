@@ -193,16 +193,7 @@
 
     }
 
-    unang intent - not send 
-    2nd intent  - send - 2nd storage meron from new phone call 
-
-
-
-    then bumalik ako sa unang intent 
-
-    send sms - 
-
- 
+  
     var ezcommButtonVar = setInterval(addEzcommCoreLauncher, 1500);
     function addEzcommCoreLauncher() {
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
