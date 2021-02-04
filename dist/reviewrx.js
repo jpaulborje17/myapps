@@ -163,7 +163,9 @@
                 window.parent.sessionStorage.setItem(scaseinteraction, data);
                 isNull = true;
             } else {
-                appendToStorage(scaseinteraction, data);
+                if(sessionStorage.getItem('revRxBenScase') === scaseinteraction) {
+                    appendToStorage(scaseinteraction, data);
+                } 
             }
             return false;
         }
@@ -182,30 +184,7 @@
         window.parent.sessionStorage.setItem(name, oldContainer += newAuto);
     }
 
-   /* window.parent.openEzcomm =  function() {
-     
-  
-        ezcommCommunications = {
-            config: {
-                data: {
-                    member: {},
-                    request_metadata: {}
-                }
-            }
-        }; 
-
-    
-
-
-
-
-        ezcommCommunications.config.data.member = getMemberDataMandR();
-        ezcommCommunications.config.data.request_metadata = requestMetaDataMandR();
-        ezcommCore.app.open(ezcommCommunications.config);
-
-        window.parent.addEventListener("message", messageEvent, false);
-    }; */
-
+ 
     var ezcommButtonVar = setInterval(addEzcommCoreLauncher, 1500);
     function addEzcommCoreLauncher() {
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
@@ -235,58 +214,10 @@
             ezcommCommunications.config.data.message;
             ezcommCore.app.open(ezcommCommunications.config);
 
+            window.parent.addEventListener("message", messageEvent, false);
 
         } 
     });
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-  /*  var EmailCheckRadioButtonContentYes = '<td class="dataValueWrite" style="height:38px;width:193px;">\
-	<div class="radioTable" >\
-	    <div>\
-	        <span class="col-3"><input name="optradio" type="radio" value="yes" id="ezcomm-mnr-mail-question-yes" class="Radio ezcomm-mnr-mail-question-buttons" style="vertical-align: middle;" checked><label class="rb_ rb_standard radioLabel">Yes</label></span>\<span class="col-3"><input name="optradio" type="radio" value="no" id="ezcomm-mnr-mail-question-no" class="ezcomm-mnr-mail-question-button" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">No</label></span>\
-	    </div>\
-	</div>\
-    </td>';
-    
-    if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
-        if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButtonRx").length === 0) {
-            window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
-                '<tr id="newlyAddedQuestionEmail"><td><label class="dataValueWrite a4meDiv" style="vertical-align:middle;">Does the member want to receive provider information via text or email?</label></td>' + EmailCheckRadioButtonContentYes + '</tr>')
-        }
-    } */
-
-
-
-
-
-
-  /*  $(document).on('DOMSubtreeModified', '#pyFlowActionHTML > div', function() {
-        if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
-            if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButtonRx").length === 0) {
-                window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
-                    '<tr id="newlyAddedQuestionEmail"><td><label class="dataValueWrite a4meDiv" style="vertical-align:middle;">Does the member want to receive provider information via text or email?</label></td>' + EmailCheckRadioButtonContentYes + '</tr>')
-            }
-        }
-    }); */
-
-
-
 
 
 }(jQuery, window, document));
