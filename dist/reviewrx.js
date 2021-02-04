@@ -182,7 +182,8 @@
     }
 
     window.parent.openEzcomm =  function() {
-
+        var xxxhouseholdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
+        console.log(xxxhouseholdIdReviews);
         ezcommCommunications = {
             config: {
                 data: {
@@ -192,6 +193,7 @@
             }
         };
 
+    
         ezcommCommunications.config.data.member = getMemberDataMandR();
         ezcommCommunications.config.data.request_metadata = requestMetaDataMandR();
         ezcommCore.app.open(ezcommCommunications.config);
