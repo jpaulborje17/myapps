@@ -44,7 +44,7 @@
     };
 
     function getMemberDataMandR() {
-        // member session
+        // member session data
         var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
         var ezcommMandRMemObj = {};
 
