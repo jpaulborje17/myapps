@@ -217,7 +217,7 @@
     } */
 
 
-    window.parent.$(document).on('change', '.ezcomm-mnr-mail-question-buttons', function() {
+    window.parent.$(document).on('click', '.ezcomm-mnr-mail-question-buttons', function() {
         if (this.value == "yes") {
 
             ezcommCommunications = {
