@@ -183,7 +183,7 @@
 
     window.parent.openEzcomm =  function() {
         var xxxhouseholdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
-        console.log(xxxhouseholdIdReviews);
+        console.log('household id onclick ' + xxxhouseholdIdReviews);
         ezcommCommunications = {
             config: {
                 data: {
