@@ -194,6 +194,10 @@
         };
 
     
+
+
+
+        
         ezcommCommunications.config.data.member = getMemberDataMandR();
         ezcommCommunications.config.data.request_metadata = requestMetaDataMandR();
         ezcommCore.app.open(ezcommCommunications.config);
