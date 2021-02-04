@@ -184,15 +184,7 @@
 
     window.parent.openEzcomm =  function() {
      
-     var v = setTimeout(function(){
-        var xxxhouseholdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
-        console.log(xxxhouseholdIdReviews);
-      }, 1500);
-
-      
-
-        console.log('household id timer ' + v);
-        ezcommCommunications = {
+           ezcommCommunications = {
             config: {
                 data: {
                     member: {},
@@ -200,10 +192,6 @@
                 }
             }
         };
-
-    
-
-
 
 
         ezcommCommunications.config.data.member = getMemberDataMandR();
@@ -224,6 +212,7 @@
     } */
 
     if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
+        console.log('id load ' + householdIdReviews);
         if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButtonRx").length === 0) {
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
                 '<button style="margin-bottom:13px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 10px;background:url(/a4me/ezcomm-launcher-maestro-review-rx-benefits/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openEzcomm()" type="button" id="ezcommLauncherButtonRx"></button>')
@@ -231,7 +220,8 @@
     }
 
 
-    $(document).on('DOMSubtreeModified', '#pyFlowActionHTML div ', function() {
+    $(document).on('DOMSubtreeModified', '#pyFlowActionHTML div', function() {
+        console.log('id household ' + householdIdReviews);
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
             if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButtonRx").length === 0) {
                 window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
