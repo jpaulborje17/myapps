@@ -265,7 +265,6 @@
 
 
     $(document).on('DOMSubtreeModified', '#pyFlowActionHTML > div', function() {
-        console.log('id household ' + householdIdReviewss);
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
             if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButtonRx").length === 0) {
                 window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
