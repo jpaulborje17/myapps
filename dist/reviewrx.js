@@ -2,8 +2,6 @@
 (function($, window, document, undefined) {
 
     'use strict';
-    // Get member sessionStorage from maestro
-    var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
     var ezcommCommunications;
     var scaseinteraction;
     var householdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
@@ -46,6 +44,8 @@
     };
 
     function getMemberDataMandR() {
+        // member session
+        var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
         var ezcommMandRMemObj = {};
 
         var memberDob = member_dataSession.member_dob;
