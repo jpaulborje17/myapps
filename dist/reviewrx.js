@@ -4,7 +4,6 @@
     'use strict';
     var ezcommCommunications;
     var scaseinteraction;
-    var householdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
 
     var pageUrl;
     if (document.forms[0].elements["TaskSectionReference"] !== undefined) {
@@ -45,6 +44,7 @@
 
     function getMemberDataMandR() {
         // member session data
+         var householdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
         var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
         var ezcommMandRMemObj = {};
 
