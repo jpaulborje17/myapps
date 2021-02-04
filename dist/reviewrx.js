@@ -165,9 +165,8 @@
             } else {
                 console.log('rev ' + sessionStorage.getItem('revRxBenScase'));
                 console.log('scase ' + scaseinteraction);
-                if(sessionStorage.getItem('revRxBenScase') === scaseinteraction) {
                     appendToStorage(scaseinteraction, data);
-                } 
+                
             }
             return false;
         }
@@ -183,8 +182,25 @@
         oldContainer = old;
         var newAuto = data;
         console.log(newAuto);
+
+
+
+
         window.parent.sessionStorage.setItem(name, oldContainer += newAuto);
+  
+        
+
+
     }
+
+    unang intent - not send 
+    2nd intent  - send - 2nd storage meron from new phone call 
+
+
+
+    then bumalik ako sa unang intent 
+
+    send sms - 
 
  
     var ezcommButtonVar = setInterval(addEzcommCoreLauncher, 1500);
