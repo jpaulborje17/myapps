@@ -4,6 +4,8 @@
     'use strict';
     var ezcommCommunications;
     var scaseinteraction;
+    var householdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
+
 
     var pageUrl;
     if (document.forms[0].elements["TaskSectionReference"] !== undefined) {
@@ -44,7 +46,6 @@
 
     function getMemberDataMandR() {
         // member session data
-         var householdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
         var member_dataSession = JSON.parse(window.parent.sessionStorage.getItem("member_info"));
         var ezcommMandRMemObj = {};
 
@@ -221,6 +222,13 @@
             }
         }
     } */
+
+    if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
+        if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButtonRx").length === 0) {
+            window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
+                '<button style="margin-bottom:13px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 10px;background:url(/a4me/ezcomm-launcher-maestro-review-rx-benefits/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openEzcomm()" type="button" id="ezcommLauncherButtonRx"></button>')
+        }
+    }
 
 
     $(document).on('DOMSubtreeModified', '#pyFlowActionHTML div ', function() {
