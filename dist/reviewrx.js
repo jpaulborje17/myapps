@@ -211,7 +211,7 @@
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
             if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButtonRx").length === 0) {
                 window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
-                    '<button style="margin-bottom:13px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 10px;background:url(/a4me/ezcomm-launcher-maestro-review-rx-benefits/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openEzcomm()" type="button" id="ezcommLauncherButtonRx" value="btn"></button>')
+                    '<button style="margin-bottom:13px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 10px;background:url(/a4me/ezcomm-launcher-maestro-review-rx-benefits/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" type="button" id="ezcommLauncherButtonRx" value="btn"></button>')
             }
         }
     } 
