@@ -220,25 +220,12 @@
     window.parent.$(document).on('change', '.ezcomm-mnr-mail-question-buttons', function() {
         if (this.value == "yes") {
 
-          
-            ezcommCommunications = {
-                config: {
-                    data: {
-                        member: {},
-                        request_metadata: {},
-                        message: messagesMandR()
-
-                    }
-                }
-            };
 
             ezcommCommunications.config.data.member = getMemberDataMandR();
             ezcommCommunications.config.data.request_metadata = requestMetaDataMandR();
             ezcommCommunications.config.data.message;
             ezcommCore.app.open(ezcommCommunications.config);
 
-
-         
 
         } else {
             if(sessionStorage.getItem(scaseinteraction) === null) {
@@ -265,7 +252,7 @@
 
 
 
-    
+
 
 
     $(document).on('DOMSubtreeModified', '#pyFlowActionHTML > div', function() {
