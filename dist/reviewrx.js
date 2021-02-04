@@ -182,11 +182,15 @@
     }
 
     window.parent.openEzcomm =  function() {
+     
+     var v = setTimeout(function(){
         var xxxhouseholdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
-     
-     
-     
-        console.log('household id onclick ' + xxxhouseholdIdReviews);
+        console.log(xxxhouseholdIdReviews);
+      }, 1500);
+
+      
+
+        console.log('household id timer ' + v);
         ezcommCommunications = {
             config: {
                 data: {
@@ -200,7 +204,7 @@
 
 
 
-        
+
         ezcommCommunications.config.data.member = getMemberDataMandR();
         ezcommCommunications.config.data.request_metadata = requestMetaDataMandR();
         ezcommCore.app.open(ezcommCommunications.config);
