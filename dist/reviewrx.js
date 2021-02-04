@@ -204,21 +204,21 @@
         ezcommCore.app.open(ezcommCommunications.config);
 
         window.parent.addEventListener("message", messageEvent, false);
-    };
+    }; */
 
-   /* var ezcommButtonVar = setInterval(addEzcommCoreLauncher, 1500);
+    var ezcommButtonVar = setInterval(addEzcommCoreLauncher, 1500);
     function addEzcommCoreLauncher() {
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
             if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButtonRx").length === 0) {
                 window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
-                    '<button style="margin-bottom:13px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 10px;background:url(/a4me/ezcomm-launcher-maestro-review-rx-benefits/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openEzcomm()" type="button" id="ezcommLauncherButtonRx"></button>')
+                    '<button style="margin-bottom:13px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 10px;background:url(/a4me/ezcomm-launcher-maestro-review-rx-benefits/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" onclick="window.parent.openEzcomm()" type="button" id="ezcommLauncherButtonRx" value="btn"></button>')
             }
         }
-    } */
+    } 
 
 
-    window.parent.$(document).on('click', '.ezcomm-mnr-mail-question-buttons', function() {
-        if (this.value == "yes") {
+    window.parent.$(document).on('click', '#ezcommLauncherButtonRx', function() {
+        if (this.value == "btn") {
 
             ezcommCommunications = {
                 config: {
@@ -236,19 +236,15 @@
             ezcommCore.app.open(ezcommCommunications.config);
 
 
-        } else {
-            if(sessionStorage.getItem(scaseinteraction) === null) {
-                window.parent.sessionStorage.setItem("QuestionradioStatus", "OPT_OUT");
-            }
-        }
+        } 
     });
 
 
 
 
-    
 
-    var EmailCheckRadioButtonContentYes = '<td class="dataValueWrite" style="height:38px;width:193px;">\
+
+  /*  var EmailCheckRadioButtonContentYes = '<td class="dataValueWrite" style="height:38px;width:193px;">\
 	<div class="radioTable" >\
 	    <div>\
 	        <span class="col-3"><input name="optradio" type="radio" value="yes" id="ezcomm-mnr-mail-question-yes" class="Radio ezcomm-mnr-mail-question-buttons" style="vertical-align: middle;" checked><label class="rb_ rb_standard radioLabel">Yes</label></span>\<span class="col-3"><input name="optradio" type="radio" value="no" id="ezcomm-mnr-mail-question-no" class="ezcomm-mnr-mail-question-button" style="vertical-align: middle;"><label class="rb_ rb_standard radioLabel">No</label></span>\
@@ -261,7 +257,7 @@
             window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
                 '<tr id="newlyAddedQuestionEmail"><td><label class="dataValueWrite a4meDiv" style="vertical-align:middle;">Does the member want to receive provider information via text or email?</label></td>' + EmailCheckRadioButtonContentYes + '</tr>')
         }
-    }
+    } */
 
 
 
