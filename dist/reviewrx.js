@@ -220,6 +220,15 @@
     window.parent.$(document).on('change', '.ezcomm-mnr-mail-question-buttons', function() {
         if (this.value == "yes") {
 
+            ezcommCommunications = {
+                config: {
+                    data: {
+                        member: {},
+                        request_metadata: {}
+                    }
+                }
+            };
+
 
             ezcommCommunications.config.data.member = getMemberDataMandR();
             ezcommCommunications.config.data.request_metadata = requestMetaDataMandR();
