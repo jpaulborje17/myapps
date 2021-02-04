@@ -163,10 +163,18 @@
                 window.parent.sessionStorage.setItem(scaseinteraction, data);
                 isNull = true;
             } else {
-                console.log('rev ' + sessionStorage.getItem('revRxBenScase'));
-                console.log('scase ' + scaseinteraction);
-                    appendToStorage(scaseinteraction, data);
                 
+
+                var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
+                var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
+                var scaseinteractions = interaction + " " + sCase;
+                console.log(scaseinteractions);
+
+                    appendToStorage(scaseinteraction, data);
+            
+                    
+
+
             }
             return false;
         }
