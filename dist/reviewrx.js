@@ -163,6 +163,8 @@
                 window.parent.sessionStorage.setItem(scaseinteraction, data);
                 isNull = true;
             } else {
+                console.log('rev ' + sessionStorage.getItem('revRxBenScase'));
+                console.log('scase ' + scaseinteraction);
                 if(sessionStorage.getItem('revRxBenScase') === scaseinteraction) {
                     appendToStorage(scaseinteraction, data);
                 } 
