@@ -264,14 +264,14 @@
 
 
 
-    $(document).on('DOMSubtreeModified', '#pyFlowActionHTML > div', function() {
+  /*  $(document).on('DOMSubtreeModified', '#pyFlowActionHTML > div', function() {
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
             if (window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#ezcommLauncherButtonRx").length === 0) {
                 window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#SelPlanID").parent().parent().parent().parent().parent().parent().parent().parent().parent().append(
                     '<tr id="newlyAddedQuestionEmail"><td><label class="dataValueWrite a4meDiv" style="vertical-align:middle;">Does the member want to receive provider information via text or email?</label></td>' + EmailCheckRadioButtonContentYes + '</tr>')
             }
         }
-    });
+    }); */
 
 
 
