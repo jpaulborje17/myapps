@@ -6,6 +6,10 @@
     var scaseinteraction;
     var householdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
 
+    function getScaseIntentRx(str, scaseStr) {
+        return str.indexOf(scaseStr) !== - 1;
+    }
+
 
     var pageUrl;
     if (document.forms[0].elements["TaskSectionReference"] !== undefined) {
@@ -24,11 +28,15 @@
     if (pageUrl == "UHG-MedRet-IIM-Work-ReviewRxBenefits" ||
         pageUrl == "EnterRequestDetails")
     {
+
         var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
         var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
         scaseinteraction = interaction + " " + sCase;
-        sessionStorage.setItem("revRxBenScase", scaseinteraction);
-        sessionStorage.setItem("campaignName", "Review Rx Benefits");
+
+        if(getScaseIntentRx(scaseinteraction, "Review Rx Benefits")) {
+            sessionStorage.setItem("revRxBenScase", scaseinteraction);
+            sessionStorage.setItem("campaignName", "Review Rx Benefits");
+         }
     }
 
     var isAutodocEnabled = function() {
@@ -54,7 +62,7 @@
         var month = memberDob.substring(4, 6);
         var day = memberDob.substring(6, 8);
         memberDob = month + "/" + day + "/" + year;
-         
+
         ezcommMandRMemObj.version = "2.0";
         ezcommMandRMemObj.firstName = member_dataSession.member_first_name;
         ezcommMandRMemObj.lastName = member_dataSession.member_last_name;
@@ -98,7 +106,7 @@
         var plugin = {};
         plugin.pluginId = 5;
         plugin.name = "M&R";
-        plugin.defaultCampaign = "Select a Campaign";
+        plugin.defaultCampaign = "";
         pluginObj.push(plugin);
         var plugin2 = {};
         plugin2.pluginId = "10";
@@ -160,31 +168,10 @@
             var data = msg.data.replace("Preference ", "").replace("Override ", "");
             var isNull = false;
             if(window.parent.sessionStorage.getItem(scaseinteraction) === null) {
-
-                var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-                var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
-                var scaseinteractions = interaction + " " + sCase;
-                console.log("null " + scaseinteractions);
-
-
                 window.parent.sessionStorage.setItem(scaseinteraction, data);
-
-
                 isNull = true;
             } else {
-                
-
-                var sCase = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find('title').html().trim();
-                var interaction = window.parent.$("label:contains('Interaction ID:')").text().split(":")[1].trim();
-                var scaseinteractionss = interaction + " " + sCase;
-                console.log("append " + scaseinteractionss);
-
-
-                    appendToStorage(scaseinteraction, data);
-            
-                    
-
-
+                appendToStorage(scaseinteraction, data);
             }
             return false;
         }
@@ -200,18 +187,10 @@
         oldContainer = old;
         var newAuto = data;
         console.log(newAuto);
-
-
-
-
         window.parent.sessionStorage.setItem(name, oldContainer += newAuto);
-  
-        
-
-
     }
 
-  
+
     var ezcommButtonVar = setInterval(addEzcommCoreLauncher, 1500);
     function addEzcommCoreLauncher() {
         if(window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents().find("#RequestType").val() === "AssistWithRxBenefits") {
@@ -220,7 +199,7 @@
                     '<button style="margin-bottom:13px;width: 100%;max-width: 59px;height: 60px;border-radius: 10px; cursor: pointer;margin-top: 10px;background:url(/a4me/ezcomm-launcher-maestro-review-rx-benefits/images/ezcomm_big.png);background-position: center;background-repeat: no-repeat;background-size: cover" type="button" id="ezcommLauncherButtonRx" value="btn"></button>')
             }
         }
-    } 
+    }
 
 
     window.parent.$(document).on('click', '#ezcommLauncherButtonRx', function() {
@@ -243,7 +222,7 @@
 
             window.parent.addEventListener("message", messageEvent, false);
 
-        } 
+        }
     });
 
 
