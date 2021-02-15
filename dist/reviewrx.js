@@ -220,7 +220,13 @@
             ezcommCommunications.config.data.message;
             ezcommCore.app.open(ezcommCommunications.config);
 
-            window.parent.addEventListener("message", messageEvent, false);
+
+            var iframe = window.parent.$('iframe[id=' + activeTier1IframeId + ']').contents();
+
+            if(iframe) {
+                window.parent.addEventListener("message", messageEvent, false);
+            }
+
 
         }
     });
