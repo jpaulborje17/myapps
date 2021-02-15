@@ -205,6 +205,8 @@
     window.parent.$(document).on('click', '#ezcommLauncherButtonRx', function() {
         if (this.value == "btn") {
 
+            window.parent.removeEventListener("message", messageEvent, false);      // Succeeds
+
             ezcommCommunications = {
                 config: {
                     data: {
