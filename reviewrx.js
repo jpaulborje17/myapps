@@ -3,6 +3,7 @@
 
     'use strict';
     var ezcommCommunications;
+    console.log('testssss');
     var scaseinteraction;
     var householdIdReviews = getAttributeValue("pyWorkPage", "MemberID");
 
